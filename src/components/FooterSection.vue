@@ -1,17 +1,7 @@
 <template>
   <footer>
 <div class="bg-black">
-<ol>
-    
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
 
-    
-
-</ol>
 </div>
 
 

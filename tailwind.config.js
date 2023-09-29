@@ -6,10 +6,10 @@ module.exports = {
       colors: {
         vuejs: "#FFBD33",
       },
-      fontFamily:{
-        
-      }
+      fontFamily: {},
     },
   },
-  plugins: [],
+  plugins: [
+
+  ],
 };
