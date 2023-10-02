@@ -1,9 +1,9 @@
 <template>
   <div>
     <header-section @logout="logClientOut" :client="client"></header-section>
-    <router-view
+    <router-view 
       @clientloggedin="authenticateClient"
-      :client="client"
+
     ></router-view>
     <footer-section />
   </div>
@@ -14,25 +14,26 @@ import Cookies from "js-cookie";
 import HeaderSection from "./components/HeaderSection.vue";
 import FooterSection from "./components/FooterSection.vue";
 export default {
-  data() {
-    return {
-      client: false,
-    };
-  },
- mounted() {
-  this.authenticateClient()
- },
   name: "App",
   components: {
     HeaderSection,
     FooterSection,
   },
+  data() {
+    return {
+      client: false,
+    };
+  },
+  mounted() {
+    this.authenticateClient();
+  },
+
   methods: {
     authenticateClient() {
-    this.client = Cookies.get("client")
-    if(this.client) {
-      this.client = JSON.parse(this.client)
-    }
+      this.client = Cookies.get("client");
+      if (this.client) {
+        this.client = JSON.parse(this.client);
+      }
     },
     logClientOut() {
       Cookies.remove("client");

@@ -1,25 +1,31 @@
 import StrarStreetView from "@/views/StrarStreetView.vue";
-import LoginVIew from "@/views/LoginView.vue"
-import RegisterView from "@/views/RegisterView.vue"
+import LoginVIew from "@/views/LoginView.vue";
+import RegisterView from "@/views/RegisterView.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
+import ItemsView from "@/views/ItemsView.vue";
 
 const routes = [
+  {
+    path: "/login",
+    name: "login",
+    component: LoginVIew,
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: RegisterView,
+  },
   {
     path: "/starstreet",
     name: "starstreet",
     component: StrarStreetView,
   },
   {
-    path: "/login",
-    name: "login",
-    component: LoginVIew
+    path: "/categories/:slug",
+    name: "categories",
+    component: ItemsView,
   },
-  {
-    path:"/register",
-    name:"register",
-    component:RegisterView
-  }
 ];
 
 const router = createRouter({

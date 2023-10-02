@@ -1,11 +1,11 @@
 <template>
   <header>
-    <div class="p-2 bg-gray-100 justify-center flex text-center">
+    <div class="p-2 bg-orange-400 font-normal text-white justify-center flex text-center">
       <h2 class="text-bold">
         Free shipping for orders over $30.00 and free returns
       </h2>
     </div>
-    <div class="bg-white pl-2 justify-between">
+    <div class=" pl-2 justify-between">
       <nav>
         <div class="text-white flex justify-end gap-x-9 m-4 pl-96">
           <button
@@ -51,9 +51,9 @@
         </div>
       </nav>
     </div>
-    <div class="bg-gray-200 p-10">
+    <div class="bg-orange-500 p-10 mt-3">
       <Popover class="justify-end text-black text-xl">
-        <PopoverButton class="bg-white p-2 rounded-lg">Clothing</PopoverButton>
+        <PopoverButton class="p-2 rounded-lg">Questions</PopoverButton>
 
         <PopoverPanel
           class="absolute bg-gray-600 text-white p-6 mt-2 rounded-lg h-30"
