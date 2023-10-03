@@ -23,8 +23,9 @@
             <p>Register</p>
           </button>
           <button
+          @click="$router.push('/favorites')"
             v-if="client"
-            class="bg-red-500 rounded-md p-2 hover:bg-slate-500"
+            class="bg-orange-500 rounded-md p-2 hover:bg-slate-500"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

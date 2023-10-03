@@ -1,9 +1,9 @@
 <template>
   <div>
     <header-section @logout="logClientOut" :client="client"></header-section>
-    <router-view 
+    <router-view
       @clientloggedin="authenticateClient"
-
+      :client="client"
     ></router-view>
     <footer-section />
   </div>

@@ -1,6 +1,7 @@
 import StrarStreetView from "@/views/StrarStreetView.vue";
 import LoginVIew from "@/views/LoginView.vue";
 import RegisterView from "@/views/RegisterView.vue";
+import FavoritesView from "@/views/FavoritesView.vue"
 
 import { createRouter, createWebHistory } from "vue-router";
 import ItemsView from "@/views/ItemsView.vue";
@@ -26,6 +27,11 @@ const routes = [
     name: "categories",
     component: ItemsView,
   },
+  {
+    path: "/favorites",
+    name: "favorites",
+    component: FavoritesView,
+  }
 ];
 
 const router = createRouter({
