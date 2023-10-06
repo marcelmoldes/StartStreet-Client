@@ -16,7 +16,7 @@ import CategoriesCardComponent from "@/components/CategoriesCardComponent.vue";
 export default {
   components: {
     CategoriesCardComponent,
-    DecorationCardComponent
+    DecorationCardComponent,
   },
   data() {
     return {

@@ -1,10 +1,11 @@
-import StrarStreetView from "@/views/StrarStreetView.vue";
+import StarStreetView  from "@/views/StarStreetView.vue";
 import LoginVIew from "@/views/LoginView.vue";
 import RegisterView from "@/views/RegisterView.vue";
 import FavoritesView from "@/views/FavoritesView.vue"
-
+import CategoryView from "@/views/CategoryView.vue"
+import ItemView from "@/views/ItemView.vue";
 import { createRouter, createWebHistory } from "vue-router";
-import ItemsView from "@/views/ItemsView.vue";
+
 
 const routes = [
   {
@@ -20,17 +21,22 @@ const routes = [
   {
     path: "/starstreet",
     name: "starstreet",
-    component: StrarStreetView,
+    component: StarStreetView,
   },
   {
     path: "/categories/:slug",
     name: "categories",
-    component: ItemsView,
+    component: CategoryView,
   },
   {
     path: "/favorites",
     name: "favorites",
     component: FavoritesView,
+  },
+  {
+    path: "/items/:slug",
+    name:"item",
+    component: ItemView
   }
 ];
 

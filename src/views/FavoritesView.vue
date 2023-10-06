@@ -1,22 +1,25 @@
 <template>
   <div>
-    <h1>Favorites</h1>
-    <items-card-component
+    <div class="bg-gray-300 p-10 " >
+<h1 class="text-white text-2xl text-center font-bold">Favorite Items</h1>
+    </div>
+    <category-card-component
       :item="favorite.item"
       v-for="favorite in favorites"
       :key="favorite"
       :client="client"
+      
     >
-    </items-card-component>
+    </category-card-component>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import ItemsCardComponent from "@/components/ItemsCardComponent.vue";
+import CategoryCardComponent from "@/components/CategoryCardComponent.vue";
 export default {
-  props: ["client"],
-  components: { ItemsCardComponent },
+  props: ["client",],
+  components: { CategoryCardComponent },
   data() {
     return {
       favorites: [],

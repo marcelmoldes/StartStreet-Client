@@ -3,9 +3,11 @@
     <header-section @logout="logClientOut" :client="client"></header-section>
     <router-view
       @clientloggedin="authenticateClient"
+      @viewCart="shoppingCartOpen = true"
       :client="client"
     ></router-view>
     <footer-section />
+    <shopping-cart :open="shoppingCartOpen" @close="shoppingCartOpen = false" />
   </div>
 </template>
 
@@ -13,15 +15,18 @@
 import Cookies from "js-cookie";
 import HeaderSection from "./components/HeaderSection.vue";
 import FooterSection from "./components/FooterSection.vue";
+import ShoppingCart from "./components/ShoppingCart.vue";
 export default {
   name: "App",
   components: {
     HeaderSection,
     FooterSection,
+    ShoppingCart,
   },
   data() {
     return {
       client: false,
+      shoppingCartOpen: false
     };
   },
   mounted() {

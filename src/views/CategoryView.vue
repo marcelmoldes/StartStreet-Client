@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="text-center mt-5">
+    <div class="text-center p-5 bg-gray-300 mt-0">
       <h1 class="font-medium text-3xl">{{ category.title }}</h1>
       <h3 class="font-medium text-xl">{{ category.description }}</h3>
     </div>
     <div class="grid grid-cols-4 px-20 ml-10 mx-auto">
-      <items-card-component
+      <category-card-component
         @setFavorite="setFavorite($event)"
         @removeFavorite="removeFavorite($event)"
         :item="item"
@@ -13,18 +13,18 @@
         :key="item"
         :client="client"
       >
-      </items-card-component>
+      </category-card-component>
     </div>
   </div>
 </template>
 
 <script>
-import ItemsCardComponent from "@/components/ItemsCardComponent.vue";
+import CategoryCardComponent from "@/components/CategoryCardComponent.vue";
 import axios from "axios";
 export default {
   props: ["client", "itemId"],
   components: {
-    ItemsCardComponent,
+    CategoryCardComponent,
   },
   data() {
     return {
@@ -69,6 +69,15 @@ export default {
         }
       }
       // this.loadData();
+    },
+    async removeComment(commentId) {
+      await axios.delete("http://localhost:8081/comments/" + commentId, {
+        comment_id: commentId,
+        headers: {
+          Authorization: this.client ? "Bearer " + this.client.token : null,
+        },
+      });
+      this.loadData();
     },
     async loadData() {
       let response = await axios.get(
