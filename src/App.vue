@@ -1,13 +1,21 @@
 <template>
   <div>
-    <header-section @logout="logClientOut" :client="client"></header-section>
+    <header-section
+      @logout="logClientOut"
+      @viewCart="shoppingCartOpen = true"
+      :client="client"
+    ></header-section>
     <router-view
       @clientloggedin="authenticateClient"
       @viewCart="shoppingCartOpen = true"
       :client="client"
     ></router-view>
     <footer-section />
-    <shopping-cart :client="client" v-if="client" :open="shoppingCartOpen" @close="shoppingCartOpen = false" />
+    <shopping-cart
+      :client="client"
+      :open="shoppingCartOpen"
+      @close="shoppingCartOpen = false"
+    />
   </div>
 </template>
 

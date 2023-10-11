@@ -51,7 +51,7 @@
                         :key="cartItem"
                       >
                         <img
-                          src="https://tailwindui.com/img/ecommerce-images/confirmation-page-06-product-01.jpg"
+                          :src="cartItem.item.images[0].url"
                           class="h-24 w-24 flex-none rounded-md bg-gray-100 object-cover object-center"
                         />
                         <div class="flex-auto space-y-1 text-lg">
@@ -59,24 +59,39 @@
                           <div>
                             <button
                               class="bg-blue-500 rounded-md w-6 text-center text-white font-bold"
+                              :disabled="busy"
                               @click="decrease(cartItem.item.id)"
                             >
                               -
                             </button>
                             {{ cartItem.quantity }}
-                            <button @click="increase(cartItem.item.id)"
+                            <button
+                              @click="increase(cartItem.item.id)"
+                              :disabled="busy"
                               class="bg-blue-500 rounded-md w-6 text-center text-white font-bold"
                             >
                               +
                             </button>
                           </div>
-
-                          <p class="flex-none font-medium text-gray-900">
-                            34 $
-                          </p>
+                          <div class="flex gap-x-2">
+                            
+                            <p class="flex-none font-medium text-blue-600">
+                              ${{ cartItem.item.price * cartItem.quantity }}
+                            </p>
+                          </div>
                         </div>
                       </li>
                     </ul>
+                    <button
+                      type="button"
+                      class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
+                      v-if="cartItems.length > 0"
+                    >
+                      Checkout
+                    </button>
+                    <div class="text-center text-lg font-sembiold" v-else>
+                      There are no items in your cart.
+                    </div>
                   </div>
                 </div>
               </DialogPanel>
@@ -103,6 +118,7 @@ export default {
   data() {
     return {
       cartItems: [],
+      busy: false,
     };
   },
   components: {
@@ -113,11 +129,14 @@ export default {
     TransitionRoot,
     XMarkIcon,
   },
-
-  async mounted() {
-    this.loadData();
-  },
   props: ["open", "client"],
+  watch: {
+    open(newValue) {
+      if (newValue === true) {
+        this.loadData();
+      }
+    },
+  },
   methods: {
     async loadData() {
       let response = await axios.get("http://localhost:8081/cart", {
@@ -127,14 +146,34 @@ export default {
       });
       this.cartItems = response.data.cart;
     },
+    async increase(itemId) {
+      this.busy = true;
+      await axios.post(
+        "http://localhost:8081/cart",
+        {
+          item_id: itemId,
+          client_id: this.client.id,
+        },
+
+        {
+          headers: {
+            Authorization: this.client ? "Bearer " + this.client.token : null,
+          },
+        }
+      );
+      this.busy = false;
+      this.loadData();
+    },
+    async decrease(itemId) {
+      this.busy = true;
+      await axios.delete("http://localhost:8081/cart/" + itemId, {
+        headers: {
+          Authorization: this.client ? "Bearer " + this.client.token : null,
+        },
+      });
+      this.busy = false;
+      this.loadData();
+    },
   },
-  async increase(itemId) {
-    // post to cart
-    this.loadData();
-  },
-  async decrease(itemId) {
-    // delete to cart
-    this.loadData();
-  }
 };
 </script>
