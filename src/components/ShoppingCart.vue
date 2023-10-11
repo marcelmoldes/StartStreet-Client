@@ -21,11 +21,11 @@
                 <div
                   class="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl"
                 >
-                  <div class="px-4 sm:px-6">
+                  <div class="px-4 mt-6 sm:px-6">
                     <div class="flex items-start justify-between">
                       <DialogTitle
                         class="text-base font-semibold leading-6 text-gray-900"
-                        >Panel title</DialogTitle
+                        >My Cart</DialogTitle
                       >
                       <div class="ml-3 flex h-7 items-center">
                         <button
@@ -41,7 +41,42 @@
                     </div>
                   </div>
                   <div class="relative mt-6 flex-1 px-4 sm:px-6">
-                    <!-- Your content -->
+                    <ul
+                      role="list"
+                      class="mt-6 divide-y divide-gray-200 border-t border-gray-200 text-sm font-medium text-gray-500"
+                    >
+                      <li
+                        class="flex space-x-6 py-6"
+                        v-for="cartItem in cartItems"
+                        :key="cartItem"
+                      >
+                        <img
+                          src="https://tailwindui.com/img/ecommerce-images/confirmation-page-06-product-01.jpg"
+                          class="h-24 w-24 flex-none rounded-md bg-gray-100 object-cover object-center"
+                        />
+                        <div class="flex-auto space-y-1 text-lg">
+                          <h1>{{ cartItem.item.title }}</h1>
+                          <div>
+                            <button
+                              class="bg-blue-500 rounded-md w-6 text-center text-white font-bold"
+                              @click="decrease(cartItem.item.id)"
+                            >
+                              -
+                            </button>
+                            {{ cartItem.quantity }}
+                            <button @click="increase(cartItem.item.id)"
+                              class="bg-blue-500 rounded-md w-6 text-center text-white font-bold"
+                            >
+                              +
+                            </button>
+                          </div>
+
+                          <p class="flex-none font-medium text-gray-900">
+                            34 $
+                          </p>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </DialogPanel>
@@ -54,6 +89,7 @@
 </template>
   
 <script>
+import axios from "axios";
 import {
   Dialog,
   DialogPanel,
@@ -64,6 +100,11 @@ import {
 import { XMarkIcon } from "@heroicons/vue/24/outline";
 
 export default {
+  data() {
+    return {
+      cartItems: [],
+    };
+  },
   components: {
     Dialog,
     DialogPanel,
@@ -72,6 +113,28 @@ export default {
     TransitionRoot,
     XMarkIcon,
   },
-  props: ['open']
+
+  async mounted() {
+    this.loadData();
+  },
+  props: ["open", "client"],
+  methods: {
+    async loadData() {
+      let response = await axios.get("http://localhost:8081/cart", {
+        headers: {
+          Authorization: this.client ? "Bearer " + this.client.token : null,
+        },
+      });
+      this.cartItems = response.data.cart;
+    },
+  },
+  async increase(itemId) {
+    // post to cart
+    this.loadData();
+  },
+  async decrease(itemId) {
+    // delete to cart
+    this.loadData();
+  }
 };
 </script>

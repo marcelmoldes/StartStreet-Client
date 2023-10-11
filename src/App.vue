@@ -7,7 +7,7 @@
       :client="client"
     ></router-view>
     <footer-section />
-    <shopping-cart :open="shoppingCartOpen" @close="shoppingCartOpen = false" />
+    <shopping-cart :client="client" v-if="client" :open="shoppingCartOpen" @close="shoppingCartOpen = false" />
   </div>
 </template>
 
@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       client: false,
-      shoppingCartOpen: false
+      shoppingCartOpen: false,
     };
   },
   mounted() {

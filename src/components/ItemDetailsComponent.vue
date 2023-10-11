@@ -64,8 +64,8 @@
             <button
               type="button"
               class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
-              @click="addToCart"   
-              >
+              @click="addToCart"
+            >
               Add to Cart
             </button>
             <button type="button" class="">
@@ -93,6 +93,7 @@
 </template>
     
   <script>
+import axios from "axios";
 import { HeartIcon } from "@heroicons/vue/24/outline";
 import { HeartIcon as HeartIconSolid } from "@heroicons/vue/20/solid";
 
@@ -111,10 +112,23 @@ export default {
   props: ["item", "client"],
   emits: ["setFavorite", "removeFavorite", "viewCart"],
   methods: {
-    addToCart() {
-      // ajax
-      this.$emit('viewCart')
-    }
-  }
+    async addToCart() {
+      await axios.post(
+        "http://localhost:8081/cart",
+        {
+          item_id: this.item.id,
+          client_id: this.client.id,
+        },
+
+        {
+          headers: {
+            Authorization: this.client ? "Bearer " + this.client.token : null,
+          },
+        }
+      );
+
+      this.$emit("viewCart");
+    },
+  },
 };
 </script>

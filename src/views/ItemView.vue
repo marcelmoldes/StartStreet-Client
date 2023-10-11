@@ -77,6 +77,7 @@ export default {
       });
       this.item.favorite = false;
     },
+    // hacer load data de post cart
     async loadData() {
       let itemResponse = await axios.get(
         "http://localhost:8081/items/" + this.$route.params.slug,
