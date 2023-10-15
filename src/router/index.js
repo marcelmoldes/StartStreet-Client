@@ -6,7 +6,6 @@ import CategoryView from "@/views/CategoryView.vue"
 import ItemView from "@/views/ItemView.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import CheckoutView from "@/views/CheckoutView.vue";
-import OrderSuccesfulView from "@/views/OrderSuccesfulView.vue";
 
 
 const routes = [
@@ -45,11 +44,6 @@ const routes = [
     name: "Checkout",
     component: CheckoutView
   },
-  {
-    path: "/ordersuccessful",
-    name: "ordersuccessful",
-    component: OrderSuccesfulView
-  }
 ];
 
 const router = createRouter({

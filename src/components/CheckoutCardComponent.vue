@@ -426,6 +426,7 @@
           </button>
         </form>
       </div>
+      <h1 v-if="paymentError" class="text-red-500 text-xl ">Payment Error</h1>
     </section>
   </main>
 </template>
@@ -436,6 +437,7 @@ import { required, email, minLength, maxLength } from "@vuelidate/validators";
 import { Disclosure, DisclosurePanel, DisclosureButton } from "@headlessui/vue";
 export default {
   props: ["client"],
+  emits: ["orderSuccessful",],
   components: { Disclosure, DisclosurePanel, DisclosureButton },
   setup() {
     return {
@@ -445,22 +447,19 @@ export default {
   data() {
     return {
       order: {
-        email: "",
-        full_name: "",
-        phone: "",
-        address: "",
-        city: "",
-        province: "",
-        postal_code: "",
-        card_name: "",
-        card_number: "",
-        expiration_date: "",
-        cvc: "",
-        subtotal: "",
-        taxes: "",
-        shipping: "",
-        total: "",
+        email: "marcel.moldes@gmail.com",
+        full_name: "jyjygjgy",
+        phone: "777777",
+        address: "hfthasdasdas",
+        city: "tfhfththtf",
+        province: "tfhtfhfth",
+        postal_code: "7677",
+        card_name: "htfhfhfthtf",
+        card_number: "576767657",
+        expiration_date: "6767",
+        cvc: "7676",
       },
+      paymentError: false,
 
       cartItems: [],
     };
@@ -541,7 +540,7 @@ export default {
 
     let subtotal = 0;
     for (let cartItem of this.cartItems) {
-      subtotal = subtotal + cartItem.quantity * cartItem.item.price;
+      subtotal = subtotal + (cartItem.quantity * cartItem.item.price);
     }
     this.order.subtotal = subtotal;
 
@@ -551,13 +550,16 @@ export default {
     }
     this.order.shipping = shipping;
 
-    this.order.taxes = Math.round(subtotal * 0.1);
-    this.order.total = subtotal + shipping + this.order.taxes;
+    let taxes = Math.round(subtotal * 0.1);
+    this.order.taxes = taxes;
+
+    this.order.total = subtotal + shipping + taxes;
   },
   methods: {
     async submitOrder() {
       this.v$.$validate();
       if (!this.v$.$error) {
+        this.paymentError = false
         const response = await axios.post(
           "http://localhost:8081/order",
 
@@ -573,10 +575,6 @@ export default {
             card_number: this.order.card_number,
             expiration_date: this.order.expiration_date,
             cvc: this.order.cvc,
-            subtotal: this.order.subtotal,
-            taxes: this.order.taxes,
-            shipping: this.order.shipping,
-            total: this.order.total,
             client_id: this.client.id,
           },
 
@@ -588,10 +586,9 @@ export default {
         );
 
         if (response.data.success) {
-          this.$emit("orderSuccessful")  
-         this.$router.push("/ordersuccessful");
+          this.$emit("orderSuccessful", response.data.order);
         } else {
-          alert("error cabron");
+         this.paymentError = true
         }
       }
     },
