@@ -5,6 +5,8 @@ import FavoritesView from "@/views/FavoritesView.vue"
 import CategoryView from "@/views/CategoryView.vue"
 import ItemView from "@/views/ItemView.vue";
 import { createRouter, createWebHistory } from "vue-router";
+import CheckoutView from "@/views/CheckoutView.vue";
+import OrderSuccesfulView from "@/views/OrderSuccesfulView.vue";
 
 
 const routes = [
@@ -37,6 +39,16 @@ const routes = [
     path: "/items/:slug",
     name:"item",
     component: ItemView
+  },
+  {
+    path: "/checkout",
+    name: "Checkout",
+    component: CheckoutView
+  },
+  {
+    path: "/ordersuccessful",
+    name: "ordersuccessful",
+    component: OrderSuccesfulView
   }
 ];
 

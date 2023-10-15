@@ -3,7 +3,7 @@
     <div class="bg-gray-300 p-10 " >
 <h1 class="text-white text-2xl text-center font-bold">Favorite Items</h1>
     </div>
-    <category-card-component
+    <category-card-component class="m-9 text-center md:w-80 lg:w-80 grid-cols-4 w-50 md:py-20 leading-150 py-20"
       :item="favorite.item"
       v-for="favorite in favorites"
       :key="favorite"

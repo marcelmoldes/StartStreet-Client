@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="text-center p-5 bg-gray-300 mt-0">
+
       <h1 class="font-medium text-3xl">{{ category.title }}</h1>
       <h3 class="font-medium text-xl">{{ category.description }}</h3>
     </div>
@@ -10,7 +11,7 @@
         @removeFavorite="removeFavorite($event)"
         :item="item"
         v-for="item in items"
-        :key="item"
+        :key="item" 
         :client="client"
       >
       </category-card-component>
