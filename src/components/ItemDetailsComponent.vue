@@ -54,29 +54,30 @@
               </div> -->
 
         <div class="mt-6">
-          <h3 class="sr-only"></h3>
-          {{ item.price }}
+        
+          
           <div class="space-y-6 text-base text-gray-700" />
         </div>
-        <h1>{{ item.title }}</h1>
+        <h1 class="text-3xl">{{ item.title }}</h1>
+        <h2 class="text-xl">{{ item.price }} $</h2>
         <form class="mt-6">
           <div class="mt-10 flex">
             <button
               type="button"
-              class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
+              class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-black px-8 py-3 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2  sm:w-full"
               @click="addToCart"
             >
               Add to Cart
             </button>
             <button type="button" class="">
               <HeartIconSolid
-                class="h-7 w-7 flex-shrink-0 fill-orange-600"
+                class="h-10 w-10 ml-5 flex-shrink-0 fill-orange-500 border-solid border-black border-2"
                 aria-hidden="true"
                 v-if="item.favorite"
                 @click="$emit('removeFavorite', item.id)"
               />
               <HeartIcon
-                class="h-6 w-6 flex-shrink-0"
+                class="h-10 w-10 ml-5 flex-shrink-0 border-solid border-black border-2"
                 v-else
                 @click="
                   client

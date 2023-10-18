@@ -1,15 +1,19 @@
 <template>
   <header>
     <div
-      class="p-2 bg-orange-400 font-normal text-white justify-center flex text-center"
+      class="p-2  font-normal text-gray-500 justify-center flex text-center"
     >
       <h2 class="text-bold">
         Free shipping for orders over $30.00 and free returns
       </h2>
     </div>
-    <div class="pl-2 justify-between">
+  
+
+    <div class="pl-2  p-2  justify-between">
       <nav>
-        <div class="text-white flex justify-end gap-x-9 m-4 pl-96">
+  
+        
+        <div class="text-white rounded-md bg-gray-700 p-5 px-10  flex justify-end gap-x-9 m-4 pl-96">
           <button
             v-if="!client"
             @click="$router.push('/login')"
@@ -27,7 +31,7 @@
           <button
             @click="$router.push('/favorites')"
             v-if="client"
-            class="bg-orange-500 rounded-md p-2 hover:bg-slate-500"
+            class="bg-indigo-500 rounded-md p-2 hover:bg-slate-500"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +48,12 @@
               />
             </svg>
           </button>
-          <button @click="$emit('viewCart')" v-if="client" class="bg-orange-500 rounded-md p-2 hover:bg-slate-500">
+
+          <button
+            @click="$emit('viewCart')"
+            v-if="client"
+            class=" rounded-md p-2 hover:bg-slate-500 bg-indigo-500"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -63,32 +72,25 @@
           <button
             v-if="client"
             @click="$emit('logout') + $router.push('/starstreet')"
-            class="bg-black rounded-lg p-2 hover:bg-slate-500"
+            class="bg-indigo-300  rounded-lg p-2 hover:bg-slate-500"
           >
             <p>Logout</p>
+          </button>
+
+          <button
+            v-if="client"
+    @click="this.$router.push('/orders')"
+            class="bg-indigo-300 rounded-lg p-2 hover:bg-slate-500"
+          >
+            <p>My orders</p>
           </button>
         </div>
       </nav>
     </div>
-    <div class="bg-orange-500 p-10 mt-3">
-      <Popover class="justify-end text-black text-xl">
-        <PopoverButton class="p-2 rounded-lg">Questions</PopoverButton>
+    
+   
 
-        <PopoverPanel
-          class="absolute bg-gray-600 text-white p-6 mt-2 rounded-lg h-30"
-        >
-          <div class="grid grid-cols-2">
-            <a class="hover:text-black" href="/T-Shirts">T-Shirts</a>
-            <a class="hover:text-black" href="/Jackets">Jackets</a>
-            <a class="hover:text-black" href="/Trousers">Trousers</a>
-            <a class="hover:text-black" href="/Sweatshirts">Sweatshirts</a>
-            <a class="hover:text-black" href="/Sneakers">Sneakers</a>
-          </div>
 
-          <img src="" alt="" />
-        </PopoverPanel>
-      </Popover>
-    </div>
   </header>
 </template>
   
@@ -98,13 +100,11 @@
 
 
 <script>
-import { Popover, PopoverButton, PopoverPanel } from "@headlessui/vue";
+
 export default {
   props: ["client"],
   components: {
-    Popover,
-    PopoverButton,
-    PopoverPanel,
+   
   },
 };
 </script>

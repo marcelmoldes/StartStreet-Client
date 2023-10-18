@@ -6,6 +6,7 @@ import CategoryView from "@/views/CategoryView.vue"
 import ItemView from "@/views/ItemView.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import CheckoutView from "@/views/CheckoutView.vue";
+import OrdersView from "@/views/OrdersView.vue";
 
 
 const routes = [
@@ -44,6 +45,11 @@ const routes = [
     name: "Checkout",
     component: CheckoutView
   },
+  {
+    path: "/orders",
+    name: "Orders",
+    component: OrdersView
+  }
 ];
 
 const router = createRouter({
