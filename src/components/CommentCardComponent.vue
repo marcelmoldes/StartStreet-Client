@@ -1,4 +1,5 @@
 <template>
+  <div>
   <h1 class="mt-20 text-2xl">RECENT VIEWS</h1>
   <div
     v-for="comment in item.comments"
@@ -39,7 +40,7 @@
       <p class="text-gray-700 text-lg font-sans">"{{ comment.message }}"</p>
       <h3 class="text-black">{{ comment.createdAt }}</h3>
     </div>
-  </div>
+  </div></div>
 </template>
 
 <script>

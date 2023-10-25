@@ -1,14 +1,18 @@
 <template>
-  <div class="bg-white mt-20">
-    <div class="overflow-hidden sm:pt-14">
-      <div class="bg-gray-800">
+  <div class="py-80 ">
+    <div class="overflow-hidden rounded-lg  sm:pt-14">
+      <div class="bg-gray-900">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div class="relative pb-16 pt-48 sm:pb-24">
+          <div class="relative pb-16 pt-48 sm:pb-24 ">
             <div>
               <h2
                 class="text-4xl font-bold tracking-tight text-white md:text-5xl"
               >
-                Real Street Edition
+                NEW ITEMS<br />
+                NEW ITEMS<br />
+                NEW ITEMS<br />
+                NEW ITEMS<br />
+
                 <br />
                 Up to 50% off.
               </h2>
@@ -90,41 +94,71 @@
   </div>
 
   <div class="">
-    <div class="relative bg-black">
+    <div class="relative  bg-black">
       <!-- Decorative image and overlay -->
 
-      <div aria-hidden="true" class="absolute inset-0 bg-gray-900 opacity-50" />
+      <div aria-hidden="true" class="absolute inset-0 bg-black opacity-50" />
 
       <div
         class="relative mx-auto flex max-w-3xl flex-col items-center px-6 py-32 text-center sm:py-64 lg:px-0"
       >
-        <h1 class="text-4xl font-bold tracking-tight text-white lg:text-6xl">
+        <h1
+          class="font-hallowen text-4xl font-bold tracking-tight text-white lg:text-6xl"
+        >
           Star Street Edition Halloween
         </h1>
       </div>
 
-      <div class="grid grid-cols-4">
-        <img
-          class="  object-cover "
-          src="https://img01.ztat.net/article/spp-media-p1/3e305b933b854f4c882a24735ef14da9/78042ba892e14a788eab0da2a9ce16f0.jpg?imwidth=1800"
-          alt=""
-        />
-        <img
-          class="object-cover "
-          src="https://img01.ztat.net/article/spp-media-p1/29e270e7a12441a8a928bb2c6637c930/6b0415526fba45f38fbbdadf3de048b5.jpg?imwidth=762"
-          alt=""
-        />
-        <img
-          class=" object-cover "
-          src="https://img01.ztat.net/article/spp-media-p1/c8d5f0d859b23767947fecee8bf2d62a/76eee6b878f244d7b5278362546f2f33.jpg?imwidth=762"
-          alt=""
-        />
-        <img
-          class="object-cover "
-          src="https://img01.ztat.net/article/spp-media-p1/1e822b8e272933a3848323e5cf6b756d/41fa0bfcc6d449609b3572ec62f1aebf.jpg?imwidth=762"
-          alt=""
-        />
+      <div class="">
+        <section class="flex">
+          <img
+            class="object-cover"
+            src="https://img01.ztat.net/article/spp-media-p1/3e305b933b854f4c882a24735ef14da9/78042ba892e14a788eab0da2a9ce16f0.jpg?imwidth=1800"
+            alt=""
+          />
+          <img
+            class="object-cover"
+            src="https://img01.ztat.net/article/spp-media-p1/29e270e7a12441a8a928bb2c6637c930/6b0415526fba45f38fbbdadf3de048b5.jpg?imwidth=762"
+            alt=""
+          />
+          <img
+            class="object-cover"
+            src="https://img01.ztat.net/article/spp-media-p1/c8d5f0d859b23767947fecee8bf2d62a/76eee6b878f244d7b5278362546f2f33.jpg?imwidth=762"
+            alt=""
+          />
+          <img
+            class="object-cover"
+            :src="images"
+            :alt="Text"
+          />
+        </section>
       </div>
     </div>
   </div>
 </template>
+<script>
+
+export default {
+  data() {
+    return {
+      images:'https://img01.ztat.net/article/spp-media-p1/1e822b8e272933a3848323e5cf6b756d/41fa0bfcc6d449609b3572ec62f1aebf.jpg?imwidth=762'
+ , text:'Img'
+    }
+  }
+}
+</script>
+
+<style scoped>
+section img {
+  flex-grow: 20;
+  opacity: 0.9;
+  object-fit: cover;
+  transition: 0.5s ease in ease;
+  width: 200px;
+}
+section img:hover {
+  width: 250px;
+  opacity: 1;
+  filter: contrast(120%);
+}
+</style>

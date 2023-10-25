@@ -1,19 +1,16 @@
 <template>
   <header>
-    <div
-      class="p-2  font-normal text-gray-500 justify-center flex text-center"
-    >
+    <div class="p-2 font-normal text-gray-500 justify-center flex text-center">
       <h2 class="text-bold">
         Free shipping for orders over $30.00 and free returns
       </h2>
     </div>
-  
 
-    <div class="pl-2  p-2  justify-between">
+    <div class="pl-2 p-2 justify-between">
       <nav>
-  
-        
-        <div class="text-white rounded-md bg-gray-700 p-5 px-10  flex justify-end gap-x-9 m-4 pl-96">
+        <div
+          class="text-white rounded-md bg-gray-700 p-5 px-10 flex justify-end gap-x-9 m-4 pl-96"
+        >
           <button
             v-if="!client"
             @click="$router.push('/login')"
@@ -52,7 +49,7 @@
           <button
             @click="$emit('viewCart')"
             v-if="client"
-            class=" rounded-md p-2 hover:bg-slate-500 bg-indigo-500"
+            class="rounded-md p-2 hover:bg-slate-500 bg-indigo-500"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -72,25 +69,21 @@
           <button
             v-if="client"
             @click="$emit('logout') + $router.push('/starstreet')"
-            class="bg-indigo-300  rounded-lg p-2 hover:bg-slate-500"
+            class="bg-indigo-300 rounded-lg p-2 hover:bg-slate-500"
           >
             <p>Logout</p>
           </button>
 
           <button
             v-if="client"
-    @click="this.$router.push('/orders')"
+            @click="this.$router.push('/orders')"
             class="bg-indigo-300 rounded-lg p-2 hover:bg-slate-500"
           >
-            <p>My orders</p>
+            <p>My Account</p>
           </button>
         </div>
       </nav>
     </div>
-    
-   
-
-
   </header>
 </template>
   
@@ -100,12 +93,9 @@
 
 
 <script>
-
 export default {
   props: ["client"],
-  components: {
-   
-  },
+  components: {},
 };
 </script>
 

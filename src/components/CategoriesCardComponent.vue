@@ -1,5 +1,5 @@
 <template>
-  <div class="px-20 ">
+  <div id="categories" class="px-20 mt-40">
     <a
       :href="`/categories/${category.slug}`"
       class="m-9  text-center lg:w-80 grid-cols-4 w-50 leading-150 mt-8"
@@ -23,5 +23,18 @@ export default {
 };
 </script>
    
-   <style>
+   <style scoped>
+   img {
+    flex-grow: 20;
+ 
+  object-fit: cover;
+  transition: 0.5s ease in ease;
+
+   }
+   img:hover {
+    width: 300px;
+  opacity: 1;
+  filter: contrast(100%);
+
+   }
 </style>

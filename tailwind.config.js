@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: ["./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
@@ -6,7 +7,9 @@ module.exports = {
       colors: {
         vuejs: "#FFBD33",
       },
-      fontFamily: {},
+      fontFamily: {
+        'hallowen': ['Nosifer']
+      }
     },
   },
   plugins: [
