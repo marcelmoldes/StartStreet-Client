@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div class="mt-5 text-center text-4xl font-extrabold">
-      <h1>Log In</h1>
-    </div>
-
     <div
       class="inline-block mt-3 text-center bg-red-600 text-white p-1 rounded-lg"
       v-if="clientError"
@@ -11,16 +7,17 @@
       This user doesn't exist
     </div>
 
-    <div class="mt-10 justify-center px-6 py-12 lg:px-8">
+    <div class="justify-center mt-10 py-12 lg:px-8">
       <div class="mt-10 rounded-lg sm:mx-auto sm:w-full sm:max-w-sm">
         <form class="space-y-6" action="#" method="POST">
           <div>
+            <h1 class="text-center text-4xl font-extrabold">Log In</h1>
             <label
               for="email"
-              class="block text-sm font-medium leading-6 text-gray-900"
+              class="block mt-20 text-sm font-medium leading-6 text-gray-900"
               >Email
             </label>
-            <div class="mt-2">
+            <div class="m">
               <input
                 id="email"
                 name="email"
