@@ -6,8 +6,9 @@ import CategoryView from "@/views/CategoryView.vue"
 import ItemView from "@/views/ItemView.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import CheckoutView from "@/views/CheckoutView.vue";
+import AccountView from "@/views/AccountView.vue";
 import OrdersView from "@/views/OrdersView.vue";
-
+import OrderDetails from "@/views/OrderDetails.vue";
 
 const routes = [
   {
@@ -46,10 +47,20 @@ const routes = [
     component: CheckoutView
   },
   {
-    path: "/orders",
-    name: "Orders",
-    component: OrdersView
-  }
+    path: "/account",
+    name: "Account",
+    component: AccountView
+  },
+  {
+path: "/orders",
+name: "Orders",
+component: OrdersView
+  },
+  {
+    path: "/orders/:order_id",
+    name: "OrderDetails",
+    component: OrderDetails
+      }
 ];
 
 const router = createRouter({

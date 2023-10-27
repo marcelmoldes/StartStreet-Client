@@ -1,5 +1,6 @@
 <template>
-  <div id="categories" class="px-20 mt-40">
+ 
+  <div  class="md:px-3 md:w-200  lg:px-20">
     <a
       :href="`/categories/${category.slug}`"
       class="m-9  text-center lg:w-80 grid-cols-4 w-50 leading-150 mt-8"
@@ -10,7 +11,7 @@
       />
     </a>
     <h1 
-      class=" text-gray-400  px-2 py-2 italic text-xl   items-center align-items text-center m-6 rounded-lg "
+      class=" text-white  px-2 py-2 italic text-xl   items-center align-items text-center m-6 rounded-lg "
     >
       {{ category.title }}
     </h1>
@@ -36,5 +37,9 @@ export default {
   opacity: 1;
   filter: contrast(100%);
 
+   }
+   #imagen {
+    background-image: url(../assets/city.jpg);
+    background-repeat: no-repeat;
    }
 </style>

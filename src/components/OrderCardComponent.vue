@@ -1,5 +1,6 @@
 <template>
   <div class="">
+
     <div class="bg-gray-300 p-6 rounded-lg">
       <svg
         xmlns="http://www.w3.org/2000/svg"

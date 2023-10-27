@@ -1,8 +1,6 @@
 <template>
-  <div class="bg-gray-300 p-10">
-    <h1 class="text-white text-2xl text-center font-bold">Your Orders</h1>
-  </div>
-  <div class="grid grid-cols-4 gap-x-3">
+  
+    <div class="grid grid-cols-4 gap-x-3">
     <order-card-component
       class="m-9 text-center md:w-80 lg:w-80 grid-cols-4 w-50 md:py-20 leading-150 py-20"
       v-for="order in orders"
@@ -10,11 +8,11 @@
       :client="client"
       :order="order"
     >
-    </order-card-component>
+    </order-card-component> 
   </div>
 </template>
-  
-  <script>
+
+<script>
 import axios from "axios";
 import OrderCardComponent from "@/components/OrderCardComponent.vue";
 export default {
@@ -37,4 +35,8 @@ export default {
 </script>
   
   <style>
+</style>
+
+<style>
+
 </style>

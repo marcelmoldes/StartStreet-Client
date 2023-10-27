@@ -1,18 +1,14 @@
 <template>
-  <body
-    class="bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-700 via-blue-800 to-gray-900"
-  >
-    <div></div>
-
-    <div class="grid grid-cols-4 mx-auto">
+  <div id="street">
+    <div class="grid grid-cols-4 mx-auto opacity">
       <categories-card-component
         :category="category"
         v-for="category in categories"
         :key="category"
       />
     </div>
-    <decoration-card-component></decoration-card-component>
-  </body>
+  </div>
+  <decoration-card-component></decoration-card-component>
 </template>
 
 <script>
@@ -36,5 +32,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+#street {
+  background-image: url(../assets/r.jpg);
+  background-repeat: no-repeat;
+  background-size: 96%;
+}
 </style>

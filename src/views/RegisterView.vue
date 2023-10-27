@@ -20,11 +20,9 @@ export default {
       registerNow: true,
     };
   },
-  methods: {
-
-  }
+  methods: {},
 };
 </script>
 
-<style>
+<style scoped>
 </style>

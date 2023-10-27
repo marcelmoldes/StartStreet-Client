@@ -1,7 +1,8 @@
 <template>
-  <div class="py-80 ">
-    <div class="overflow-hidden rounded-lg  sm:pt-14">
-      <div class="bg-gray-900">
+  
+  <div class="py-10">
+    <div id="image" class="overflow-hidden rounded-lg  bg-black sm:pt-14">
+      <div>
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div class="relative pb-16 pt-48 sm:pb-24 ">
             <div>
@@ -16,7 +17,7 @@
                 <br />
                 Up to 50% off.
               </h2>
-              <div class="mt-6 text-base">
+              <div class=" text-base">
                 <a href="#" class="font-semibold text-white">
                   Shop the sale
                   <span aria-hidden="true"> &rarr;</span>
@@ -25,11 +26,11 @@
             </div>
 
             <div
-              class="absolute -top-32 left-1/2 -translate-x-1/2 transform sm:top-6 sm:translate-x-0"
+              class="absolute -top-32 left-1/2  -translate-x-1/2 transform sm:top-6 sm:translate-x-0"
             >
-              <div class="ml-24 flex min-w-max space-x-6 sm:ml-3 lg:space-x-8">
+              <div class="ml-24 flex min-w-max space-x-6 sm:ml-3  lg:space-x-8">
                 <div
-                  class="flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8"
+                  class="flex space-x-6 sm:flex-col sm:space-x-0  sm:space-y-6 lg:space-y-8"
                 >
                   <div class="flex-shrink-0">
                     <img
@@ -39,7 +40,7 @@
                     />
                   </div>
 
-                  <div class="mt-6 flex-shrink-0 sm:mt-0">
+                  <div class=" flex-shrink-0 ">
                     <img
                       class="h-64 w- rounded-lg object-cover md:h-72 md:w-72"
                       src="https://img01.ztat.net/outfit/503fa37b56fe41448318e174138520f4/ac8048d310a5403388cdc411a356a99c.jpg?imwidth=600"
@@ -58,7 +59,7 @@
                     />
                   </div>
 
-                  <div class="mt-6 flex-shrink-0 sm:mt-0">
+                  <div class=" flex-shrink-0 sm:mt-0">
                     <img
                       class="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
                       src="https://img01.ztat.net/outfit/a5d1d6d7301d4b4dabaafdb326d4fdb5/e955dc7f169749188ea6f05f68114f91.jpg?imwidth=600"
@@ -77,7 +78,7 @@
                     />
                   </div>
 
-                  <div class="mt-6 flex-shrink-0 sm:mt-0">
+                  <div class="flex-shrink-0 sm:mt-0">
                     <img
                       class="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
                       src="https://img01.ztat.net/outfit/2e40a975117f4ef3bd4bc94f09c1d435/f0f254992b034d67afd4e9229279ea42.jpg?imwidth=600"
@@ -94,7 +95,7 @@
   </div>
 
   <div class="">
-    <div class="relative  bg-black">
+    <div id="image" class="relative  bg-black">
       <!-- Decorative image and overlay -->
 
       <div aria-hidden="true" class="absolute inset-0 bg-black opacity-50" />
@@ -107,6 +108,10 @@
         >
           Star Street Edition Halloween
         </h1>
+      </div>
+     
+      
+      
       </div>
 
       <div class="">
@@ -129,12 +134,12 @@
           <img
             class="object-cover"
             :src="images"
-            :alt="Text"
+            
           />
         </section>
       </div>
     </div>
-  </div>
+
 </template>
 <script>
 
@@ -142,7 +147,7 @@ export default {
   data() {
     return {
       images:'https://img01.ztat.net/article/spp-media-p1/1e822b8e272933a3848323e5cf6b756d/41fa0bfcc6d449609b3572ec62f1aebf.jpg?imwidth=762'
- , text:'Img'
+ , 
     }
   }
 }
@@ -161,4 +166,11 @@ section img:hover {
   opacity: 1;
   filter: contrast(120%);
 }
-</style>
+
+ #image {
+  background-image: url(../assets/white.jpg);
+  background-repeat: no-repeat;
+ }
+ 
+
+ </style>

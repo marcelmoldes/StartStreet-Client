@@ -312,4 +312,9 @@ export default {
   -moz-box-shadow: 0px 2px 15px -12px rgba(0, 0, 0, 0.57);
   box-shadow: 2px 15px -12px rgba(0, 0, 0, 0.57);
 }
+
+body {
+  background-image: url(../assets/white.jpg);
+  background-repeat: no-repeat;
+}
 </style>
