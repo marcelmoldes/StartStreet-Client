@@ -1,11 +1,11 @@
 <template>
-  <div>
+  
     <header-section
       @logout="logClientOut"
       @viewCart="shoppingCartOpen = true"
       :client="client"
     ></header-section>
-    <router-view
+   <div id="street"> <router-view
       @clientloggedin="authenticateClient"
       @viewCart="shoppingCartOpen = true"
       :client="client"

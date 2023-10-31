@@ -111,7 +111,7 @@
           >SNEAKERS</a
         >
       </PopoverGroup>
-      <div class="hidden flex justify-end lg:flex lg:flex gap-10">
+      <div class="hidden justify-end lg:flex gap-10">
         <button
           v-if="!client"
           @click="$router.push('/login')"

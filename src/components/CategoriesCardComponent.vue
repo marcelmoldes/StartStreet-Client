@@ -38,8 +38,5 @@ export default {
   filter: contrast(100%);
 
    }
-   #imagen {
-    background-image: url(../assets/city.jpg);
-    background-repeat: no-repeat;
-   }
+
 </style>

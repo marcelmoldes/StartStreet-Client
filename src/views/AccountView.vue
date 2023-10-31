@@ -128,7 +128,7 @@ export default {
   
   <style scoped>
 #account {
-  background-image: url(../assets/r.jpg);
+  background-image: url(../assets/images/whitecover.jpg);
   background-repeat: no-repeat;
   background-size: 96%;
 }

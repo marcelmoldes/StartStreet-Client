@@ -314,7 +314,7 @@ export default {
 }
 
 body {
-  background-image: url(../assets/white.jpg);
+  background-image: url(../assets/images/whitecover.jpg);
   background-repeat: no-repeat;
 }
 </style>

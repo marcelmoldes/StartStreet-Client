@@ -1,14 +1,15 @@
-import StarStreetView  from "@/views/StarStreetView.vue";
+import StarStreetView from "@/views/StarStreetView.vue";
 import LoginVIew from "@/views/LoginView.vue";
 import RegisterView from "@/views/RegisterView.vue";
-import FavoritesView from "@/views/FavoritesView.vue"
-import CategoryView from "@/views/CategoryView.vue"
+import FavoritesView from "@/views/FavoritesView.vue";
+import CategoryView from "@/views/CategoryView.vue";
 import ItemView from "@/views/ItemView.vue";
 import { createRouter, createWebHistory } from "vue-router";
 import CheckoutView from "@/views/CheckoutView.vue";
 import AccountView from "@/views/AccountView.vue";
 import OrdersView from "@/views/OrdersView.vue";
-import OrderDetails from "@/views/OrderDetails.vue";
+import OrderDetailsView from "@/views/OrderDetailsView.vue";
+
 
 const routes = [
   {
@@ -38,29 +39,30 @@ const routes = [
   },
   {
     path: "/items/:slug",
-    name:"item",
-    component: ItemView
+    name: "item",
+    component: ItemView,
   },
   {
     path: "/checkout",
     name: "Checkout",
-    component: CheckoutView
+    component: CheckoutView,
   },
   {
     path: "/account",
     name: "Account",
-    component: AccountView
+    component: AccountView,
   },
   {
-path: "/orders",
-name: "Orders",
-component: OrdersView
+    path: "/orders",
+    name: "orders",
+    component: OrdersView,
   },
   {
-    path: "/orders/:order_id",
-    name: "OrderDetails",
-    component: OrderDetails
-      }
+    path: "/orders/:id",
+    name: "order",
+    component: OrderDetailsView,
+  }
+
 ];
 
 const router = createRouter({

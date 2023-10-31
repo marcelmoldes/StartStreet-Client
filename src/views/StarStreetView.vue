@@ -34,7 +34,7 @@ export default {
 
 <style scoped>
 #street {
-  background-image: url(../assets/r.jpg);
+  background-image: url(../assets/images/graffiti.jpg);
   background-repeat: no-repeat;
   background-size: 96%;
 }

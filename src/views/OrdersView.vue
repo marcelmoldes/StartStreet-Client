@@ -1,14 +1,16 @@
 <template>
-  
+  <div id="street">
     <div class="grid grid-cols-4 gap-x-3">
-    <order-card-component
-      class="m-9 text-center md:w-80 lg:w-80 grid-cols-4 w-50 md:py-20 leading-150 py-20"
-      v-for="order in orders"
-      :key="order"
-      :client="client"
-      :order="order"
-    >
-    </order-card-component> 
+      <order-card-component
+        class="m-9 text-center md:w-80 lg:w-80 grid-cols-4 w-50 md:py-20 leading-150 py-20"
+        v-for="order in orders"
+        :key="order"
+        :client="client"
+        :order="order"
+        :item="item"
+      >
+      </order-card-component>
+    </div>
   </div>
 </template>
 
@@ -35,8 +37,10 @@ export default {
 </script>
   
   <style>
+#street {
+  background-image: url(../assets/images/graffiti.jpg);
+  background-repeat: no-repeat;
+  background-size: 96%;
+}
 </style>
 
-<style>
-
-</style>
