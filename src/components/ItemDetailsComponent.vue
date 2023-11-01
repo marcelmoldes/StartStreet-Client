@@ -138,37 +138,7 @@
           </div>
         </form>
 
-        <form
-          @review-submitted="addReview"
-          class="review-form"
-          @submit.prevent="onSubmit"
-        >
-          <h3 class="text-lg font-serif m-4">Leave a review</h3>
-
-          <label for="review">Review</label>
-          <textarea class="bg-gray-200" id="review" v-model="review"></textarea>
-
-          <label class="mt-3" for="rating">Rating</label>
-          <select id="rating" v-model.number="rating">
-            <option>5</option>
-            <option>4</option>
-            <option>3</option>
-            <option>2</option>
-            <option>1</option>
-          </select>
-
-          <!-- solution -->
-          <label for="recommend">Would you recommend this product?</label>
-          <select id="recommend" v-model="recommend">
-            <option>Yes</option>
-            <option>No</option>
-          </select>
-          <!-- solution -->
-
-          <button class="bg-black mt-4 p-2 rounded-lg text-white w-143">
-            Send Review
-          </button>
-        </form>
+      
         
       </div>
     </div>
@@ -184,6 +154,7 @@ import { HeartIcon as HeartIconSolid } from "@heroicons/vue/20/solid";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/vue";
 
 export default {
+  
   data() {
     return {
       name: "",
@@ -237,6 +208,7 @@ export default {
     TabPanels,
     HeartIcon,
     HeartIconSolid,
+    
 
   },
   props: ["item", "client"],
@@ -300,18 +272,7 @@ export default {
   background-color: gray;
   cursor: not-allowed;
 }
-.review-form {
-  display: flex;
-  flex-direction: column;
-  width: 425px;
-  padding: 20px;
-  margin: 40px;
-  border: 2px solid #d8d8d8;
-  background-color: white;
-  -webkit-box-shadow: 0px 2px 15px -12px rgba(0, 0, 0, 0.57);
-  -moz-box-shadow: 0px 2px 15px -12px rgba(0, 0, 0, 0.57);
-  box-shadow: 2px 15px -12px rgba(0, 0, 0, 0.57);
-}
+
 
 body {
   background-image: url(../assets/images/whitecover.jpg);

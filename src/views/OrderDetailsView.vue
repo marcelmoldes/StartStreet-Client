@@ -1,9 +1,12 @@
 <template>
-  <order-details-component
+  <div id="street">
+     <order-details-component
     :client="client"
     :item="item"
     :order="order"
   ></order-details-component>
+  </div>
+ 
 </template>
 
 <script>
@@ -38,5 +41,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+#street {
+  background-image: url(../assets/images/graffiti.jpg);
+  background-repeat: no-repeat;
+  background-size: 96%;
+}
 </style>

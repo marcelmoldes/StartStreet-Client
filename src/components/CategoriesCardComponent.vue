@@ -11,7 +11,7 @@
       />
     </a>
     <h1 
-      class=" text-white  px-2 py-2 italic text-xl   items-center align-items text-center m-6 rounded-lg "
+      class=" text-black px-2 py-2 italic text-xl items-center align-items text-center m-6 rounded-lg "
     >
       {{ category.title }}
     </h1>

@@ -5,7 +5,7 @@
       @viewCart="shoppingCartOpen = true"
       :client="client"
     ></header-section>
-   <div id="street"> <router-view
+   <div > <router-view
       @clientloggedin="authenticateClient"
       @viewCart="shoppingCartOpen = true"
       :client="client"

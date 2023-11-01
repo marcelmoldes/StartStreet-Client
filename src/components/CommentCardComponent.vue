@@ -1,6 +1,6 @@
 <template>
   <div>
-  <h1 class="mt-20 text-2xl">RECENT VIEWS</h1>
+  <h1 class="mt-20 text-2xl">RECENT REVIEWS</h1>
   <div
     v-for="comment in item.comments"
     :key="comment.id"

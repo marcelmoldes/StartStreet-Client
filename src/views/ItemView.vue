@@ -10,17 +10,17 @@
       @removeFavorite="removeFavorite($event)"
       @viewCart="$emit('viewCart')"
     />
-
-    <comment-card-component
-      :client="client"
-      :item="item"
-      @removeComment="removeComment($event)"
-    />
     <comment-form-component
       :client="client"
       :item_id="item.id"
       @commentSend="loadData($event)"
     />
+    <comment-card-component
+      :client="client"
+      :item="item"
+      @removeComment="removeComment($event)"
+    />
+
   </div>
 </template>
 

@@ -1,32 +1,45 @@
 <template>
-  <div class="mt-10 ">
-    <label for="" class="bg-indigo-200 px-4 py-2  rounded-lg  text-sm font-medium leading-6 text-gray-900"
-      >Add your comment</label
-    >
-
-    <div class="mt-5 ">
-      <textarea
-        v-model="comment.message"
-        rows="4"
-        name=""
-        id=""
-        class="w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset  placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"
-      />
+  <div class="mt-10">
+   
+    
       
+      <div>
+         <form class="review-form">
+        <h3 class="text-lg font-serif m-4">Leave a review</h3>
 
-     
+        <label for="review">Review</label>
+        <textarea class="bg-gray-200" id="review" v-model="comment.message"></textarea>
+
+        <label class="mt-3" for="rating">Rating</label>
+        <select id="rating" v-model.number="rating">
+          <option>5</option>
+          <option>4</option>
+          <option>3</option>
+          <option>2</option>
+          <option>1</option>
+        </select>
+
+        <!-- solution -->
+        <label for="recommend">Would you recommend this product?</label>
+        <select id="recommend" v-model="recommend">
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+        <!-- solution -->
+
+        <button type="button" @click="client ? postComment() : $router.push('/login')" class="bg-black mt-4 p-2 rounded-lg text-white w-143">
+          Send Review
+        </button>
+      </form>
       <span v-if="v$.comment.message.$error" class="text-sm text-cyan-950">
         {{ v$.comment.message.$errors[0].$message }}
       </span>
+      </div>
+     
+
     </div>
-    <button
-      @click="client ? postComment() : $router.push('/login')"
-      type="button"
-      class="rounded-md mt-5 bg-indigo-400 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
-    >
-      Send Message
-    </button>
-  </div>
+  
+
 </template>
 
 <script>
@@ -85,5 +98,17 @@ export default {
 };
 </script>
 
-<style>
+<style setup>
+.review-form {
+  display: flex;
+  flex-direction: column;
+  width: 425px;
+  padding: 20px;
+  margin: 40px;
+  border: 2px solid #d8d8d8;
+  background-color: white;
+  -webkit-box-shadow: 0px 2px 15px -12px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 2px 15px -12px rgba(0, 0, 0, 0.57);
+  box-shadow: 2px 15px -12px rgba(0, 0, 0, 0.57);
+}
 </style>

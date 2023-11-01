@@ -36,11 +36,12 @@ export default {
 };
 </script>
   
-  <style>
+  <style scoped>
 #street {
-  background-image: url(../assets/images/graffiti.jpg);
+  background-image: url(../assets/images/whitecover.jpg);
   background-repeat: no-repeat;
-  background-size: 96%;
+  width: 150%;
+
 }
 </style>
 
