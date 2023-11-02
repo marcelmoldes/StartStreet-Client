@@ -10,7 +10,7 @@
     <span class="relative inline-block">
       <img
         class="h-16 w-16 rounded-lg"
-        :src="comment.client.image_profile"
+        :src="comment.client.profile_image"
         alt=""
       />
     </span>

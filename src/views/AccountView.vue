@@ -177,7 +177,7 @@
                 >
                 <input
                   type="text"
-                  :value="client.phone_number"
+                  :value="client.phone"
                   class="block rounded-md shadow-sm ring-gray-300 ring-1 flex-1 border-0 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-black sm:text-sm sm:leading-6"
                 />
               </div>
