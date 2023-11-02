@@ -1,8 +1,7 @@
 <template>
   <div id="street">
-    <div class="grid grid-cols-4 gap-x-3">
+    <div class="flex flex-col gap-y-3 max-w-xl mx-auto py-5">
       <order-card-component
-        class="m-9 text-center md:w-80 lg:w-80 grid-cols-4 w-50 md:py-20 leading-150 py-20"
         v-for="order in orders"
         :key="order"
         :client="client"
@@ -35,13 +34,4 @@ export default {
   },
 };
 </script>
-  
-  <style scoped>
-#street {
-  background-image: url(../assets/images/whitecover.jpg);
-  background-repeat: no-repeat;
-  width: 150%;
-
-}
-</style>
 

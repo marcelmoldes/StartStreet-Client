@@ -31,11 +31,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-#street {
-  background-image: url(../assets/images/graffiti.jpg);
-  background-repeat: no-repeat;
-  background-size: 96%;
-}
-</style>

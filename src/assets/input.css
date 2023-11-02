@@ -3,3 +3,8 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Advent+Pro:wght@100&family=Alumni+Sans+Collegiate+One&family=Bungee&family=Creepster&family=Croissant+One&family=Fira+Sans:wght@100;700&family=IM+Fell+English+SC&family=Krub:wght@600&family=Montserrat:wght@200&family=Nosifer&family=Noto+Sans:wght@200&family=Oswald:wght@200&family=Permanent+Marker&family=Roboto:wght@100;300;900&display=swap');
+
+#street {
+    background-image: url(../assets/images/whitecover.jpg);
+    background-repeat: no-repeat;
+}

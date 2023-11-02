@@ -215,11 +215,11 @@
               <label
                 for="name-on-card"
                 class="block text-sm font-medium text-gray-700"
-                >Full Name</label
+                >First Name</label
               >
               <div class="mt-1">
                 <input
-                  v-model="order.full_name"
+                  v-model="order.first_name"
                   type="text"
                   id="name-on-card"
                   name="name-on-card"
@@ -227,10 +227,31 @@
                   class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
                 <span
-                  v-if="v$.order.full_name.$error"
+                  v-if="v$.order.first_name.$error"
                   class="text-sm text-cyan-950"
                 >
-                  {{ v$.order.full_name.$errors[0].$message }}
+                  {{ v$.order.first_name.$errors[0].$message }}
+                </span>
+              </div>
+              <label
+                for="name-on-card"
+                class="block text-sm font-medium text-gray-700"
+                >Last Name</label
+              >
+              <div class="mt-1">
+                <input
+                  v-model="order.last_name"
+                  type="text"
+                  id="name-on-card"
+                  name="name-on-card"
+                  autocomplete="cc-name"
+                  class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+                <span
+                  v-if="v$.order.last_name.$error"
+                  class="text-sm text-cyan-950"
+                >
+                  {{ v$.order.last_name.$errors[0].$message }}
                 </span>
               </div>
             </div>
@@ -241,9 +262,20 @@
                 class="block text-sm font-medium text-gray-700"
                 >Card number</label
               >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
-</svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"
+                />
+              </svg>
 
               <div class="mt-1">
                 <input
@@ -376,11 +408,11 @@
               <label
                 for="region"
                 class="block text-sm font-medium text-gray-700"
-                >State / Province</label
+                >State</label
               >
               <div class="mt-1">
                 <input
-                  v-model="order.province"
+                  v-model="order.state"
                   type="text"
                   id="region"
                   name="region"
@@ -388,10 +420,10 @@
                   class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
                 <span
-                  v-if="v$.order.province.$error"
+                  v-if="v$.order.state.$error"
                   class="text-sm text-cyan-950"
                 >
-                  {{ v$.order.province.$errors[0].$message }}
+                  {{ v$.order.state.$errors[0].$message }}
                 </span>
               </div>
             </div>
@@ -430,7 +462,7 @@
           </button>
         </form>
       </div>
-      <h1 v-if="paymentError" class="text-red-500 text-xl ">Payment Error</h1>
+      <h1 v-if="paymentError" class="text-red-500 text-xl">Payment Error</h1>
     </section>
   </main>
 </template>
@@ -441,7 +473,7 @@ import { required, email, minLength, maxLength } from "@vuelidate/validators";
 import { Disclosure, DisclosurePanel, DisclosureButton } from "@headlessui/vue";
 export default {
   props: ["client"],
-  emits: ["orderSuccessful",],
+  emits: ["orderSuccessful"],
   components: { Disclosure, DisclosurePanel, DisclosureButton },
   setup() {
     return {
@@ -452,11 +484,13 @@ export default {
     return {
       order: {
         email: "marcel.moldes@gmail.com",
-        full_name: "jyjygjgy",
+        first_name: "jyjygjgy",
+        last_name: "jyjygjgy",
         phone: "777777",
         address: "hfthasdasdas",
         city: "tfhfththtf",
-        province: "tfhtfhfth",
+        state: "tfhtfhfth",
+
         postal_code: "7677",
         card_name: "htfhfhfthtf",
         card_number: "576767657",
@@ -477,7 +511,13 @@ export default {
           minLength: minLength(6),
           maxLength: maxLength(50),
         },
-        full_name: {
+        first_name: {
+          required,
+
+          minLength: minLength(6),
+          maxLength: maxLength(60),
+        },
+        last_name: {
           required,
 
           minLength: minLength(6),
@@ -501,7 +541,7 @@ export default {
           minLength: minLength(3),
           maxLength: maxLength(50),
         },
-        province: {
+        state: {
           required,
 
           minLength: minLength(3),
@@ -544,7 +584,7 @@ export default {
 
     let subtotal = 0;
     for (let cartItem of this.cartItems) {
-      subtotal = subtotal + (cartItem.quantity * cartItem.item.price);
+      subtotal = subtotal + cartItem.quantity * cartItem.item.price;
     }
     this.order.subtotal = subtotal;
 
@@ -563,17 +603,18 @@ export default {
     async submitOrder() {
       this.v$.$validate();
       if (!this.v$.$error) {
-        this.paymentError = false
+        this.paymentError = false;
         const response = await axios.post(
           "http://localhost:8081/order",
 
           {
             email: this.order.email,
-            full_name: this.order.full_name,
+            first_name: this.order.first_name,
+            last_name: this.order.last_name,
             phone: this.order.phone,
             address: this.order.address,
             city: this.order.city,
-            province: this.order.province,
+            state: this.order.state,
             postal_code: this.order.postal_code,
             card_name: this.order.card_name,
             card_number: this.order.card_number,
@@ -592,7 +633,7 @@ export default {
         if (response.data.success) {
           this.$emit("orderSuccessful", response.data.order);
         } else {
-         this.paymentError = true
+          this.paymentError = true;
         }
       }
     },

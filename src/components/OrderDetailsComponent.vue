@@ -31,7 +31,8 @@
           <div>
             <dt class="font-medium text-gray-900">Deliverry address</dt>
             <dd class="mt-3 text-gray-500">
-              <span class="block">{{ order.full_name }}</span>
+              <span class="block">{{ order.first_name }}</span>
+              <span class="block">{{ order.last_name }}</span>
               <span class="block">{{ order.address }}</span>
               <span class="block">{{ order.city }}</span>
             </dd>
@@ -62,7 +63,10 @@
             </dd>
           </div>
         </dl>
-
+        <img
+          :src="order.order_details[0].item.images[0].url"
+          class="mt-5 rounded-sm"
+        />
         <dl class="mt-8 divide-y divide-gray-200 text-sm lg:col-span-5 lg:mt-0">
           <div class="flex items-center justify-between pb-4">
             <dt class="text-gray-600">Subtotal</dt>
@@ -115,7 +119,8 @@
                   <dd class="mt-3 space-y-3 text-gray-500">
                     <p>{{ order.email }}</p>
                     <p>{{ order.phone }}</p>
-                    <p>{{ order.full_name }}</p>
+                    <p>{{ order.first_name }} {{ order.last_name }}</p>
+                    
                   </dd>
                 </div>
               </dl>

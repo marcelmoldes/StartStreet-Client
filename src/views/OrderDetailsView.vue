@@ -1,9 +1,10 @@
 <template>
   <div id="street">
-     <order-details-component
+    <order-details-component
     :client="client"
     :item="item"
     :order="order"
+    v-if="order"
   ></order-details-component>
   </div>
  
@@ -19,7 +20,7 @@ export default {
   },
   data() {
     return {
-      order: {},
+      order: false,
     };
   },
   async mounted() {
@@ -40,11 +41,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-#street {
-  background-image: url(../assets/images/graffiti.jpg);
-  background-repeat: no-repeat;
-  background-size: 96%;
-}
-</style>

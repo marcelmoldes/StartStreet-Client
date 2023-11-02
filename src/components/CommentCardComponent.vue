@@ -15,7 +15,8 @@
       />
     </span>
     <div class="ml-10 relative w-full">
-      <h1 class="text-lg font-bold">{{ comment.client.client_name }}</h1>
+      <h1 class="text-lg font-bold">{{ comment.client.first_name }} {{ comment.client.last_name }}</h1>
+
      
       <div
         v-if="client.id === comment.client_id"

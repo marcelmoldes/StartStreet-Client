@@ -12,21 +12,36 @@
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <form class="space-y-6" action="#" method="POST">
+        <label class="block text-sm font-medium leading-6 text-gray-900"
+          >First Name
+        </label>
+        <div class="mt-2">
+          <input
+            v-model="client.first_name"
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black"
+          />
+          <span
+            v-if="v$.client.first_name.$error"
+            class="text-sm text-cyan-950"
+          >
+            {{ v$.client.first_name.$errors[0].$message }}
+          </span>
+        </div>
         <div>
           <label class="block text-sm font-medium leading-6 text-gray-900"
-            >Full Name
+            >Last Name
           </label>
+
           <div class="mt-2">
             <input
-         
-              v-model="client.client_name"
+              v-model="client.last_name"
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-black"
             />
             <span
-              v-if="v$.client.client_name.$error"
+              v-if="v$.client.last_name.$error"
               class="text-sm text-cyan-950"
             >
-              {{ v$.client.client_name.$errors[0].$message }}
+              {{ v$.client.last_name.$errors[0].$message }}
             </span>
           </div>
         </div>
@@ -113,9 +128,11 @@ export default {
   data() {
     return {
       client: {
-        client_name: "",
+        first_name: "",
+        last_name: "",
         email: "",
         password: "",
+   
       },
       error: false,
       userRegistered: false,
@@ -124,7 +141,12 @@ export default {
   validations() {
     return {
       client: {
-        client_name: {
+        first_name: {
+          required,
+          minLength: minLength(3),
+          maxLength: maxLength(60),
+        },
+        last_name: {
           required,
           minLength: minLength(3),
           maxLength: maxLength(60),
@@ -148,9 +170,13 @@ export default {
       this.v$.$validate();
       if (!this.v$.$error) {
         let response = await axios.post("http://localhost:8081/clients", {
-          client_name: this.client.client_name,
+          first_name: this.client.first_name,
+          last_name: this.client.last_name,
           email: this.client.email,
           password: this.client.password,
+      
+   
+        
         });
         if (response.data.success === false) {
           this.error = response.data.error;
