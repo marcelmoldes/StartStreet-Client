@@ -9,6 +9,7 @@ import CheckoutView from "@/views/CheckoutView.vue";
 import AccountView from "@/views/AccountView.vue";
 import OrdersView from "@/views/OrdersView.vue";
 import OrderDetailsView from "@/views/OrderDetailsView.vue";
+import ChangePassword from "@/views/ChangePassword.vue";
 
 
 const routes = [
@@ -61,6 +62,11 @@ const routes = [
     path: "/orders/:id",
     name: "order",
     component: OrderDetailsView,
+  },
+  {
+    path: "/changepassword",
+    name: "changepassword",
+    component: ChangePassword,
   }
 
 ];

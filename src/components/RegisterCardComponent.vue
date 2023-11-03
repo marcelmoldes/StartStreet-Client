@@ -132,6 +132,7 @@ export default {
         last_name: "",
         email: "",
         password: "",
+        city: ""
    
       },
       error: false,
