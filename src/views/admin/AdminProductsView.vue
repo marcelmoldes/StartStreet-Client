@@ -5,9 +5,11 @@
       >
         <admin-menu-component :client="client" class="col-span-1"></admin-menu-component>
   
-        <div class="py-4 col-span-3">
+        <div class="py-4 col-span-3 mr-12">
           <h1 class="text-xl">Manage Products</h1>
-          asdadsasd
+          <div class="bg-white mt-4 p-4 rounded-sm">
+          asdsdadas
+        </div>
         </div>
       </div>
     </div>
