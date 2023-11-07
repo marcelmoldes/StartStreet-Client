@@ -25,7 +25,7 @@ export default {
     };
   },
   async mounted() {
-    let response = await axios.get("http://localhost:8081/orders", {
+    let response = await axios.get("http://localhost:8081/orders/history", {
       headers: {
         Authorization: this.client ? "Bearer " + this.client.token : null,
       },
