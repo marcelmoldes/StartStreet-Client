@@ -2,12 +2,12 @@
   <div id="account" class="mt-10">
     <form>
       <div
-        class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3"
+        class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-4"
       >
-        <account-menu-component :client="client"></account-menu-component>
+        <account-menu-component :client="client" class="col-span-1"></account-menu-component>
 
         <div
-          class="grid max-w-2xl mt-10 grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2"
+          class="grid max-w-2xl mt-10 grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-3"
         >
           <div
             class="inline-block mt-3 text-center bg-red-600 text-white p-1 rounded-lg"
@@ -106,7 +106,7 @@
                     type="text"
                     class="block rounded-md shadow-sm ring-gray-300 ring-1 flex-1 border-0 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-black sm:text-sm sm:leading-6"
                   />
-                  {{ client.city }}
+               
                   <span
                     v-if="v$.clientAccount.city.$error"
                     class="text-sm text-cyan-950"

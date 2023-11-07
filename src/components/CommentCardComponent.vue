@@ -12,7 +12,7 @@
           class="h-16 w-16 rounded-lg"
           :src="comment.client.profile_image"
           alt=""
-        />
+        /> 
       </span>
       <div class="ml-10 relative w-full">
         <h1 class="text-lg font-bold">

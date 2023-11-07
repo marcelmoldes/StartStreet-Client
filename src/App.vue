@@ -1,11 +1,11 @@
 <template>
-  
     <header-section
       @logout="logClientOut"
       @viewCart="shoppingCartOpen = true"
       :client="client"
     ></header-section>
-   <div > <router-view
+   <div>
+    <router-view
       @clientloggedin="authenticateClient"
       @viewCart="shoppingCartOpen = true"
       :client="client"
@@ -48,6 +48,8 @@ export default {
         this.client = JSON.parse(this.client);
       }
     },
+
+   
     logClientOut() {
       Cookies.remove("client");
       this.client = false;

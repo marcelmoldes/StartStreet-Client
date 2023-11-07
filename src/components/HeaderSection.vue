@@ -113,6 +113,14 @@
       </PopoverGroup>
       <div class="hidden justify-end lg:flex gap-10">
         <button
+          class="ml-20 text-base font-semibold text-gray-900 hover:underline hover:underline-offset-8"
+          @click="$router.push('/admin')"
+          v-if="client.role === 'admin'"
+        >
+          Admin Panel
+        </button>
+
+        <button
           v-if="!client"
           @click="$router.push('/login')"
           class="ml-20 text-base font-semibold text-gray-900 hover:underline hover:underline-offset-8"
