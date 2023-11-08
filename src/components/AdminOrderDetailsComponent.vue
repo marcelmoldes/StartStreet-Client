@@ -7,7 +7,7 @@
     >
       <div class="flex sm:items-baseline sm:space-x-4">
         <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-          Order #54879
+          Order #{{ order.order_number }}
         </h1>
       </div>
       <p class="text-sm text-gray-600">
@@ -63,9 +63,7 @@
             </dd>
           </div>
         </dl>
-        <div >
-        
-        </div>
+        <div></div>
 
         <dl class="mt-8 divide-y divide-gray-200 text-sm lg:col-span-5 lg:mt-0">
           <div class="flex items-center justify-between pb-4">
@@ -93,7 +91,7 @@
       <div class="space-y-8">
         <div
           class="border-b border-t border-gray-200 bg-white shadow-sm sm:rounded-lg sm:border"
-        >  
+        >
           <div
             class="px-4 py-6 sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:p-8"
           >
@@ -101,48 +99,42 @@
               <div
                 class="aspect-h-1 aspect-w-1 w-full flex-shrink-0 overflow-hidden rounded-lg sm:aspect-none sm:h-40 sm:w-40"
               ></div>
-
-              <div class="mt-6 sm:ml-6 sm:mt-0">
-                <h3 class="text-base font-medium text-gray-900"></h3>
-                <p class="mt-2 text-sm font-medium text-gray-900">{{}}</p>
-                <p class="mt-3 text-sm text-gray-500">{{}}</p>
-              </div>
             </div>
 
             <div class="mt-6 lg:col-span-5 lg:mt-0">
               <dl class="grid grid-cols-2 gap-x-6 text-sm">
-                <div><img
-            :src="order.order_details[0].item.images[0].url"
-            class="mt-5 w-20 rounded-sm"
-          /></div>
                 <div>
-                  <dt class="font-medium text-gray-900">
-                    Personal Information
-                  </dt>
-                  <dd class="mt-3 space-y-3 text-gray-500">
-                    <p>{{ order.email }}</p>
-                    <p>{{ order.phone }}</p>
-                    <p>{{ order.first_name }} {{ order.last_name }}</p>
-                  </dd>
+                  <img class="mt-5 w-20 rounded-sm" />
+                </div>
+                <div class="px-7 py-10 bg-violet-600 rounded-md">
+                  <div class="">
+                    <dt
+                      class="font-medium text-lg underline text-center py-1 text-gray-900 bg-white"
+                    >
+                      Personal Information
+                    </dt>
+                    <dd class="mt-3 space-y-3 text-gray-400 font-bold">
+                      <ul>
+                        <li>{{ order.email }}</li>
+                        <li>{{ order.phone }}</li>
+                        <li>{{ order.first_name }} {{ order.last_name }}</li>
+                      </ul>
+                    </dd>
+                  </div>
                 </div>
               </dl>
             </div>
-          </div>
-
-          <div class="border-t border-gray-200 px-4 py-6 sm:px-6 lg:p-8">
-            <h4 class="sr-only">Status</h4>
-            <p class="text-sm font-medium text-gray-900"></p>
-            <div class="mt-6" aria-hidden="true">
-              <div class="overflow-hidden rounded-full bg-gray-200">
-                <div class="h-2 rounded-full bg-indigo-600" />
-              </div>
-              <div
-                class="mt-6 hidden grid-cols-4 text-sm font-medium text-gray-600 sm:grid"
-              >
-                <div class="text-indigo-600">Order placed</div>
-                <div>Processing</div>
-                <div>Shipped</div>
-                <div>Delivered</div>
+            <div class="bg-gray-200">
+              <div class="mt-6 sm:ml-6 sm:mt-0">
+                <h3 class="text-base font-medium text-gray-900">
+                  {{ order.shipping_status }}
+                </h3>
+                <p class="mt-2 text-sm font-medium text-gray-900">
+                  {{ order.shipping_company }}
+                </p>
+                <p class="mt-3 text-sm text-gray-500">
+                  {{ order.tracking_number }}
+                </p>
               </div>
             </div>
           </div>
@@ -153,8 +145,13 @@
 </template>
 
 <script>
+/*
+  <input type="text" :value="order.tracking_number" @change="$emit('updateOrder', { key: 'tracking_number', value: $event.target.value })"/>
+  <input type="text" :value="order.first_name" @change="$emit('updateOrder', { key: 'first_name', value: $event.target.value })"/>
+  <button @click="$emit('save')">Save</button>
+*/
 export default {
-  props: ["client", "order", "item"],
+  props: ["order"],
 };
 </script>
 

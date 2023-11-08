@@ -9,7 +9,7 @@
       ></admin-menu-component>
 
       <div class="py-4 col-span-3 mr-12">
-        <h1 class="text-xl font-bold ">
+        <h1 class="text-xl font-bold">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -87,22 +87,20 @@
                         <th
                           scope="col"
                           class="relative py-3.5 pl-3 pr-4 sm:pr-0"
-                        >
-                          <span class="sr-only">Edit</span>
-                        </th>
+                        ></th>
                       </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
-                      <tr v-for="order in orders" :key="order.email">
+                      <tr v-for="order in orders" :key="order">
                         <td
                           class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
                         >
-                          {{ order.date }}
+                          {{ order.createdAt }}
                         </td>
                         <td
                           class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
                         >
-                         # {{ order.number }}
+                          # {{ order.order_number }}
                         </td>
                         <td
                           class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
@@ -112,7 +110,7 @@
                         <td
                           class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
                         >
-                         $ {{ order.total }}
+                          $ {{ order.total }}
                         </td>
                         <td
                           class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
@@ -138,7 +136,11 @@
                         <td
                           class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"
                         >
-                            <a href="#">View</a>
+                          <a
+                            :href="`/admin/orders/${order.id}`"
+                            class="bg-violet-600 px-3 py-1 rounded-sm"
+                            >View</a
+                          >
                         </td>
                       </tr>
                     </tbody>
@@ -154,31 +156,28 @@
 </template>
     
     <script>
+import axios from "axios";
 import AdminMenuComponent from "@/components/AdminMenuComponent.vue";
 export default {
+  props: ["client"],
   components: { AdminMenuComponent },
   data() {
     return {
-      orders: [
-        {
-          date: "29/4/2019",
-          number: "000245",
-          email: "lindsay.walton@example.com",
-          state: "New",
-
-          total: "29.99",
-        },
-        {
-          date: "29/4/2018",
-          number: "000567",
-          email: "marcel.walton@gmail.com",
-          state: "New",
-
-          total: "329.99",
-        },
-        // More people...
-      ],
+      orders: [],
     };
+  },
+  async mounted() {
+    await this.loadData();
+  },
+  methods: {
+    async loadData() {
+      let response = await axios.get("http://localhost:8081/orders", {
+        headers: {
+          Authorization: this.client ? "Bearer " + this.client.token : null,
+        },
+      });
+      this.orders = response.data.orders;
+    },
   },
 };
 </script>

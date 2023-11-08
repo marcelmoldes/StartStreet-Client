@@ -15,7 +15,7 @@ import AdminOrdersView from "@/views/admin/AdminOrdersView.vue";
 import AdminProductsView from "@/views/admin/AdminProductsView.vue";
 import AdminClientsView from "@/views/admin/AdminClientsView.vue";
 import AdminCategoriesView from "@/views/admin/AdminCategoriesView.vue";
-
+import AdminOrderDetailsView from "@/views/admin/AdminOrderDetailsView.vue";
 
 const routes = [
   {
@@ -70,7 +70,7 @@ const routes = [
   },
   {
     path: "/changepassword",
-    name: "changepassword",
+    name: "change-password",
     component: ChangePassword,
   },
   {
@@ -97,6 +97,11 @@ const routes = [
     path: "/admin/categories",
     name: "admin-categories",
     component: AdminCategoriesView,
+  },
+  {
+    path: "/admin/orders/:id",
+    name: "admin-order-details",
+    component: AdminOrderDetailsView
   },
 ];
 
