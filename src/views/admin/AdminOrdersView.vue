@@ -26,6 +26,7 @@
           </svg>
           Manage Orders
         </h1>
+
         <div class="bg-white mt-4 p-4 rounded-sm">
           <div class="px-4 sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
@@ -91,7 +92,7 @@
                       </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
-                      <tr v-for="order in orders" :key="order">
+                      <tr v-for="order in pageOfOrders" :key="order">
                         <td
                           class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
                         >
@@ -145,6 +146,87 @@
                       </tr>
                     </tbody>
                   </table>
+
+                  <div
+                    class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
+                  >
+                    <div class="flex flex-1 justify-between sm:hidden">
+                      <a
+                        href="#"
+                        class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                        >Previous</a
+                      >
+                      <a
+                        href="#"
+                        class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                        >Next</a
+                      >
+                    </div>
+                    <div
+                      class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between"
+                    >
+                      <div>
+                        <p class="text-sm text-gray-700">
+                          Showing
+                          {{ " " }}
+                          <span class="font-medium">{{ startingAt }}</span>
+                          {{ " " }}
+                          to
+                          {{ " " }}
+                          <span class="font-medium">{{ endingAt }}</span>
+                          {{ " " }}
+                          of
+                          {{ " " }}
+                          <span class="font-medium">{{ orders.length }}</span>
+                          {{ " " }}
+                          results
+                        </p>
+                      </div>
+                      <div>
+                        <nav
+                          class="isolate inline-flex -space-x-px rounded-md shadow-sm"
+                          aria-label="Pagination"
+                        >
+                          <button
+                            href="#"
+                            class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                            :class="currentPage === 1 ? 'opacity-50' : ''"
+                            :disabled="currentPage === 1"
+                            @click="currentPage -= 1"
+                          >
+                            <span class="sr-only">Previous</span>
+                            <ChevronLeftIcon
+                              class="h-5 w-5"
+                              aria-hidden="true"
+                            />
+                          </button>
+                          <!-- Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" -->
+                          <a
+                          @click="currentPage = page"
+                            href="#"
+                            aria-current="page"
+                            :class="currentPage === page ? 'relative z-10 inline-flex items-center bg-indigo-600 text-white font-semibold px-4 py-2 text-sm focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600' : 'relative inline-flex items-center px-4 py-2 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0'"
+                            v-for="page in pages"
+                            :key="page"
+                            >{{ page }}</a
+                          >
+                          <button
+                            href="#"
+                            class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                            :class="currentPage === pages ? 'opacity-50' : ''"
+                            :disabled="currentPage === pages"
+                            @click="currentPage += 1"
+                          >
+                            <span class="sr-only">Next</span>
+                            <ChevronRightIcon
+                              class="h-5 w-5"
+                              aria-hidden="true"
+                            />
+                          </button>
+                        </nav>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -157,12 +239,34 @@
     
     <script>
 import axios from "axios";
+
+import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/vue/20/solid";
 import AdminMenuComponent from "@/components/AdminMenuComponent.vue";
 export default {
   props: ["client"],
-  components: { AdminMenuComponent },
+  components: { AdminMenuComponent, ChevronRightIcon, ChevronLeftIcon },
+  computed: {
+    pageOfOrders() {
+      return this.orders.slice(this.startingAt - 1, this.endingAt - 1);
+    },
+    startingAt() {
+      return ((this.currentPage - 1) * this.recordsPerPage) + 1;
+    },
+    endingAt() {
+      const endingAt = ((this.currentPage - 1) * this.recordsPerPage) + this.recordsPerPage;
+      if(endingAt > this.orders.length) {
+        return this.orders.length;
+      }
+      return endingAt;
+    },
+    pages() {
+      return Math.ceil(this.orders.length / this.recordsPerPage);
+    }
+  },
   data() {
     return {
+      recordsPerPage: 10,
+      currentPage: 1,
       orders: [],
     };
   },
