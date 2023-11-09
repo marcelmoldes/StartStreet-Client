@@ -2,15 +2,13 @@
   <main
     class="mx-auto max-w-2xl pb-24 pt-8 sm:px-6 sm:pt-16 lg:max-w-7xl lg:px-8"
   >
-    <div
-      class="space-y-2 px-4 sm:flex sm:items-baseline sm:justify-between sm:space-y-0 sm:px-0"
-    >
-      <div class="flex sm:items-baseline sm:space-x-4">
-        <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+    <div class="sm:justify-between sm:space-y-0 sm:px-0">
+      <div class="sm:items-baseline sm:space-x-4">
+        <h1 class="text-2xl font-bold tracking-tight text-gray-800 sm:text-3xl">
           Order #{{ order.order_number }}
         </h1>
       </div>
-      <p class="text-sm text-gray-600">
+      <p class="text-sm text-gray-600 mt-4">
         Order placed
         <time datetime="2021-03-22" class="font-medium text-gray-900">{{
           order.createdAt
@@ -18,35 +16,109 @@
       </p>
     </div>
 
-    <!-- Products -->
-
-    <!-- Billing -->
     <section aria-labelledby="summary-heading" class="mt-16">
       <div
-        class="bg-gray-100 px-4 py-6 sm:rounded-lg sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8 lg:py-8"
+        class="px-4 py-6 sm:rounded-lg sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8 lg:py-8"
       >
         <dl
-          class="grid grid-cols-2 gap-6 text-sm sm:grid-cols-2 md:gap-x-8 lg:col-span-7"
+          class="grid bg-gray-200 rounded-sm p-4 grid-cols-2 gap-6 text-sm sm:grid-cols-2 md:gap-x-8 lg:col-span-7"
         >
-          <div>
-            <dt class="font-medium text-gray-900">Deliverry address</dt>
-            <dd class="mt-3 text-gray-500">
-              <span class="block">{{ order.first_name }}</span>
-              <span class="block">{{ order.last_name }}</span>
-              <span class="block">{{ order.address }}</span>
-              <span class="block">{{ order.city }}</span>
+          <div class="">
+            <dt class="font-medium text-xl text-center text-violet-700">
+              Delivery address
+            </dt>
+            <dd class="mt-3 text-gray-700 font-medium">
+              <input
+                class="block w-full mt-2 rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                type="text"
+                :value="order.first_name"
+                @change="
+                  $emit('updateOrder', {
+                    key: 'first_name',
+                    value: $event.target.value,
+                  })
+                "
+              />
+              <input
+                class="block w-full mt-2 rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                type="text "
+                :value="order.last_name"
+                @change="
+                  $emit('updateOrder', {
+                    key: 'last_name',
+                    value: $event.target.value,
+                  })
+                "
+              />
+              <input
+                class="block w-full mt-2 rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                type="text "
+                :value="order.email"
+                @change="
+                  $emit('updateOrder', {
+                    key: 'email',
+                    value: $event.target.value,
+                  })
+                "
+              />
+              <input
+                class="block w-full mt-2 rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                type="text "
+                :value="order.phone"
+                @change="
+                  $emit('updateOrder', {
+                    key: 'phone',
+                    value: $event.target.value,
+                  })
+                "
+              />
+              <input
+                class="block w-full mt-2 rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                type="text"
+                :value="order.address"
+                @change="
+                  $emit('updateOrder', {
+                    key: 'address',
+                    value: $event.target.value,
+                  })
+                "
+              />
+              <input
+                class="block w-full mt-2 rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                type="text"
+                :value="order.city"
+                @change="
+                  $emit('updateOrder', {
+                    key: 'city',
+                    value: $event.target.value,
+                  })
+                "
+              />
+              <input
+                class="block w-full mt-2 rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                type="text"
+                :value="order.state"
+                @change="
+                  $emit('updateOrder', {
+                    key: 'state',
+                    value: $event.target.value,
+                  })
+                "
+              />
             </dd>
           </div>
-          <div>
-            <dt class="font-medium text-gray-900">Payment information</dt>
-            <dd class="-ml-4 -mt-1 flex flex-wrap">
-              <div class="ml-4 mt-4 flex-shrink-0">
+          <div class="bg-white rounded-lg h-48 mt-5 text-center">
+            <dt class="font-medium bg-violet-700 p-2 text-white">
+              Payment information
+            </dt>
+            <dd class="">
+              <div class="mt-5">
                 <svg
                   aria-hidden="true"
                   width="36"
                   height="24"
                   viewBox="0 0 36 24"
-                  class="h-6 w-auto"
+                  class="ml-4"
                 >
                   <rect width="36" height="24" rx="4" fill="#224DBA" />
                   <path
@@ -54,20 +126,20 @@
                     fill="#fff"
                   />
                 </svg>
-              </div>
-              <div class="ml-4 mt-4">
                 <p class="text-gray-900">CVC {{ order.cvc }}</p>
+                <hr />
                 <p class="text-gray-900">Card Name : {{ order.card_name }}</p>
+                <hr />
                 <p class="text-gray-600">Expires {{ order.expiration_date }}</p>
+                <hr />
               </div>
             </dd>
           </div>
         </dl>
-        <div></div>
 
-        <dl class="mt-8 divide-y divide-gray-200 text-sm lg:col-span-5 lg:mt-0">
+        <dl class="divide-y divide-gray-200 text-sm lg:col-span-5">
           <div class="flex items-center justify-between pb-4">
-            <dt class="text-gray-600">Subtotal</dt>
+            <dt class="text-gray-600 mt-4">Subtotal</dt>
             <dd class="font-medium text-gray-700">${{ order.subtotal }}</dd>
           </div>
           <div class="flex items-center justify-between py-4">
@@ -82,74 +154,85 @@
             <dt class="font-medium text-gray-700">Order total</dt>
             <dd class="font-bold text-sm text-black">${{ order.total }}</dd>
           </div>
-        </dl>
-      </div>
-    </section>
-    <section aria-labelledby="products-heading" class="mt-6">
-      <h2 id="products-heading" class="sr-only">Products purchased</h2>
-
-      <div class="space-y-8">
-        <div
-          class="border-b border-t border-gray-200 bg-white shadow-sm sm:rounded-lg sm:border"
-        >
-          <div
-            class="px-4 py-6 sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:p-8"
-          >
-            <div class="sm:flex lg:col-span-7">
-              <div
-                class="aspect-h-1 aspect-w-1 w-full flex-shrink-0 overflow-hidden rounded-lg sm:aspect-none sm:h-40 sm:w-40"
-              ></div>
+          <div class="bg-gray-200 mt-4 w-60">
+            <div class="text-center">
+              <label class="text-center text-sm font-semibold text-gray-900"
+                >Shipping Company</label
+              >
+              <div class="">
+                <select
+                  :value="order.shipping_status"
+                  @change="
+                    $emit('updateOrder', {
+                      key: 'shipping_status',
+                      value: $event.target.value,
+                    })
+                  "
+                  class="mt-2 text-center bg-white rounded-md border-0 py-1.5 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                >
+                  not shipped , ready for pick up , shipped
+                  <option>Not Shipped</option>
+                  <option>Ready</option>
+                  <option>Pick Up</option>
+                </select>
+              </div>
             </div>
+            <div class="text-center mt-4">
+              <label
+                for="email"
+                class="block mt-5 text-sm font-semibold leading-6 text-gray-900"
+                >Shipping Status</label
+              >
+              <div class="">
+                <select
+                  :value="order.shipping_status"
+                  @change="
+                    $emit('updateOrder', {
+                      key: 'shipping_status',
+                      value: $event.target.value,
+                    })
+                  "
+                  class="mt-2 bg-white rounded-md border-0 py-1.5 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                >
+                  not shipped , ready for pick up , shipped
+                  <option>Not Shipped</option>
+                  <option>Ready</option>
+                  <option>Pick Up</option>
+                </select>
 
-            <div class="mt-6 lg:col-span-5 lg:mt-0">
-              <dl class="grid grid-cols-2 gap-x-6 text-sm">
-                <div>
-                  <img class="mt-5 w-20 rounded-sm" />
-                </div>
-                <div class="px-7 py-10 bg-violet-600 rounded-md">
-                  <div class="">
-                    <dt
-                      class="font-medium text-lg underline text-center py-1 text-gray-900 bg-white"
-                    >
-                      Personal Information
-                    </dt>
-                    <dd class="mt-3 space-y-3 text-gray-400 font-bold">
-                      <ul>
-                        <li>{{ order.email }}</li>
-                        <li>{{ order.phone }}</li>
-                        <li>{{ order.first_name }} {{ order.last_name }}</li>
-                      </ul>
-                    </dd>
-                  </div>
-                </div>
-              </dl>
-            </div>
-            <div class="bg-gray-200">
-              <div class="mt-6 sm:ml-6 sm:mt-0">
-                <h3 class="text-base font-medium text-gray-900">
-                  {{ order.shipping_status }}
-                </h3>
-                <p class="mt-2 text-sm font-medium text-gray-900">
-                  {{ order.shipping_company }}
-                </p>
-                <p class="mt-3 text-sm text-gray-500">
-                  {{ order.tracking_number }}
-                </p>
+                <h1
+                  class="block mt-3 text-sm font-semibold leading-6 text-gray-900"
+                >
+                  Tracking Number
+                </h1>
+                <input
+                  class="text-center m-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  type="text"
+                  :value="order.tracking_number"
+                  @change="
+                    $emit('updateOrder', {
+                      key: 'tracking_number',
+                      value: $event.target.value,
+                    })
+                  "
+                />
               </div>
             </div>
           </div>
-        </div>
+        </dl>
       </div>
+
+      <button
+        class="bg-violet-500 px-6 text-white p-2 mt-4 ml-20 rounded-lg items-center justify-center"
+        @click="$emit('save')"
+      >
+        SAVE CHANGES
+      </button>
     </section>
   </main>
 </template>
 
 <script>
-/*
-  <input type="text" :value="order.tracking_number" @change="$emit('updateOrder', { key: 'tracking_number', value: $event.target.value })"/>
-  <input type="text" :value="order.first_name" @change="$emit('updateOrder', { key: 'first_name', value: $event.target.value })"/>
-  <button @click="$emit('save')">Save</button>
-*/
 export default {
   props: ["order"],
 };

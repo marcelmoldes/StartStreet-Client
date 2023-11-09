@@ -12,6 +12,7 @@
         <div class="bg-white mt-4 p-4 rounded-sm">
           <admin-order-details-component
             :order="order"
+            :client="client"
             @updateOrder="updateOrder($event)"
             @save="save"
           ></admin-order-details-component>
@@ -21,7 +22,9 @@
   </div>
 </template>
 
+
 <script>
+// not shipped , ready for pick up , shipped.
 import axios from "axios";
 import AdminOrderDetailsComponent from "@/components/AdminOrderDetailsComponent.vue";
 import AdminMenuComponent from "@/components/AdminMenuComponent.vue";
@@ -51,9 +54,18 @@ export default {
     updateOrder(event) {
       this.order[event.key] = event.value;
     },
-    save() {
-      // this.order
-    }
+    async save() {
+      let response = await axios.put(
+        "http://localhost:8081/admin/order/" + this.$route.params.id,
+        this.order,
+        {
+          headers: {
+            Authorization: this.client ? "Bearer " + this.client.token : null,
+          },
+        }
+      );
+      this.order = response.data.order;
+    },
   },
 };
 </script>

@@ -385,7 +385,7 @@ import {
   XMarkIcon,
 } from "@heroicons/vue/24/outline";
 
-import { PhoneIcon, PlayCircleIcon } from "@heroicons/vue/20/solid";
+import { PhoneIcon, PlayCircleIcon, ChevronDownIcon } from "@heroicons/vue/20/solid";
 export default {
   props: ["client"],
   components: {
@@ -404,6 +404,7 @@ export default {
     CursorArrowRaysIcon,
     FingerPrintIcon,
     SquaresPlusIcon,
+    ChevronDownIcon,
     XMarkIcon,
   },
   data() {
