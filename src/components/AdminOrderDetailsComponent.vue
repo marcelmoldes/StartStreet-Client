@@ -161,19 +161,18 @@
               >
               <div class="">
                 <select
-                  :value="order.shipping_status"
+                  :value="order.shipping_company"
                   @change="
                     $emit('updateOrder', {
-                      key: 'shipping_status',
+                      key: 'shipping_company',
                       value: $event.target.value,
                     })
                   "
                   class="mt-2 text-center bg-white rounded-md border-0 py-1.5 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 >
-                  not shipped , ready for pick up , shipped
-                  <option>Not Shipped</option>
-                  <option>Ready</option>
-                  <option>Pick Up</option>
+                  <option>CORREOS</option>
+                  <option>UPS</option>
+                  <option>SEUR</option>
                 </select>
               </div>
             </div>
@@ -195,9 +194,9 @@
                   class="mt-2 bg-white rounded-md border-0 py-1.5 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 >
                   not shipped , ready for pick up , shipped
-                  <option>Not Shipped</option>
-                  <option>Ready</option>
-                  <option>Pick Up</option>
+                  <option>NOT SHIPPED</option>
+                  <option>READY</option>
+                  <option>PICK UP</option>
                 </select>
 
                 <h1
@@ -234,7 +233,7 @@
 
 <script>
 export default {
-  props: ["order"],
+  props: ["order",'client']
 };
 </script>
 

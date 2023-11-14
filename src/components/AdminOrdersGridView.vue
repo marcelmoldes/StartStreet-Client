@@ -1,14 +1,5 @@
 <template>
-  <div class="mt-10 bg-gray-200">
-    <div
-      class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-4"
-    >
-      <admin-menu-component
-        :client="client"
-        class="col-span-1"
-      ></admin-menu-component>
-
-      <div class="py-4 col-span-3 mr-12">
+     <div class="py-4 col-span-3 mr-12">
         <h1 class="text-xl font-bold">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -24,22 +15,20 @@
               d="M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H6.911a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661z"
             />
           </svg>
-          Manage Products
+          Manage Orders
         </h1>
-        <select
-          class="mt-2 text-center bg-white rounded-md border-0 py-1.5 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
-        >
-          <a href=""></a>
-          <option v-for="page in pages" :key="page" @click="currentPage = page">
-            Show
-          </option>
-        </select>
+        <select v-model="recordsPerPage" id="location" name="location" class="mt-2 block w-30 rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+      <option>5</option>
+      <option selected="">20</option>
+      <option>30</option>
+    </select>
+      
         <div class="bg-white mt-4 p-4 rounded-sm">
           <div class="px-4 sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
               <div class="sm:flex-auto">
                 <h1 class="text-base font-semibold leading-6 text-gray-900">
-                  Products
+                  Orders
                 </h1>
               </div>
               <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none"></div>
@@ -244,19 +233,16 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
 </template>
-    
-<script>
-import axios from "axios";
 
+<script>
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/vue/20/solid";
-import AdminMenuComponent from "@/components/AdminMenuComponent.vue";
 export default {
-  props: ["client"],
-  components: { AdminMenuComponent, ChevronRightIcon, ChevronLeftIcon },
-  computed: {
+components: {
+    ChevronLeftIcon,ChevronRightIcon
+},
+props: ['client', 'orders'],
+computed: {
     pageOfOrders() {
       return this.orders.slice(this.startingAt - 1, this.endingAt);
     },
@@ -274,29 +260,17 @@ export default {
     pages() {
       return Math.ceil(this.orders.length / this.recordsPerPage);
     },
-    y() {
-      return this.recordsPerPage;
-    },
+ 
   },
   data() {
     return {
-      recordsPerPage: 6,
+      recordsPerPage: 5,
       currentPage: 1,
-      orders: [],
     };
-  },
-  async mounted() {
-    await this.loadData();
-  },
-  methods: {
-    async loadData() {
-      let response = await axios.get("http://localhost:8081/orders", {
-        headers: {
-          Authorization: this.client ? "Bearer " + this.client.token : null,
-        },
-      });
-      this.orders = response.data.orders;
-    },
-  },
-};
+  }
+}
 </script>
+
+<style>
+
+</style>

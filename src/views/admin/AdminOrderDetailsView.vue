@@ -24,7 +24,7 @@
 
 
 <script>
-// not shipped , ready for pick up , shipped.
+import Toastify from "toastify-js";
 import axios from "axios";
 import AdminOrderDetailsComponent from "@/components/AdminOrderDetailsComponent.vue";
 import AdminMenuComponent from "@/components/AdminMenuComponent.vue";
@@ -65,7 +65,15 @@ export default {
         }
       );
       this.order = response.data.order;
-    },
+      if (response.data.success) {
+        Toastify({
+          text: "Los cambios han sido guardados",
+          position: "center",
+
+          duration: 2000,
+        }).showToast();
+      }
+    }
   },
 };
 </script>

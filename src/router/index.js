@@ -16,6 +16,7 @@ import AdminProductsView from "@/views/admin/AdminProductsView.vue";
 import AdminClientsView from "@/views/admin/AdminClientsView.vue";
 import AdminCategoriesView from "@/views/admin/AdminCategoriesView.vue";
 import AdminOrderDetailsView from "@/views/admin/AdminOrderDetailsView.vue";
+import AdminClientDetailsView from "@/views/admin/AdminClientDetailsView.vue";
 
 const routes = [
   {
@@ -102,6 +103,11 @@ const routes = [
     path: "/admin/orders/:id",
     name: "admin-order-details",
     component: AdminOrderDetailsView
+  },
+  {
+    path: "/admin/clients/:id",
+    name: "admin-client-details",
+    component: AdminClientDetailsView
   },
 ];
 
