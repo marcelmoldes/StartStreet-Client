@@ -9,6 +9,7 @@
       ></admin-menu-component>
 
       <div class="bg-white border border-slate-600 mt-5 p-10 rounded-md">
+     
         <form action="#" method="POST" class="ml-10">
           <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <div class="sm:col-span-2">

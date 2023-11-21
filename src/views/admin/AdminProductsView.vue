@@ -9,38 +9,50 @@
       ></admin-menu-component>
 
       <div class="py-4 col-span-3 mr-12">
-        <h1 class="text-xl font-bold">
-    
-          Manage Products
-        </h1>
-        <select
-          v-model="recordsPerPage"
-          id="location"
-          name="location"
-          class="mt-2 block w-30 rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
-        >
-          <option>5</option>
-          <option selected="">20</option>
-          <option>30</option>
-        </select>
+        <div class="flex items-center justify-between">
+          <h1 class="text-xl font-bold">Manage Products</h1>
+
+          <button
+            @click="this.$router.push('/admin/addproduct')"
+            class="bg-violet-600 text-white font-bold px-7 py-1"
+          >
+            Add Product
+          </button>
+        </div>
 
         <div class="bg-white mt-4 p-4 rounded-sm">
           <div class="px-4 sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
               <div class="sm:flex-auto">
-                <h1 class="text-base font-semibold leading-6 text-gray-900">
-                  Products
-                </h1>
+                <p class="text-sm text-gray-700">
+                  Showing
+                  {{ " " }}
+                  <span class="font-medium">{{ startingAt }}</span>
+
+                  to
+
+                  <span class="font-medium">{{ endingAt }}</span>
+
+                  of
+
+                  <span class="font-medium">{{ items.length }}</span>
+
+                  results
+                </p>
               </div>
-              <button
-                @click="this.$router.push('/admin/addproduct')"
-                class="bg-violet-400 text-white font-bold px-7 py-1"
+
+              <select
+                v-model="recordsPerPage"
+                id="location"
+                name="location"
+                class="mt-2 block w-30 rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-                Add Product
-              </button>
-              <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none"></div>
+                <option>5</option>
+                <option selected="">20</option>
+                <option>30</option>
+              </select>
             </div>
-            <div class="mt-8 flow-root">
+            <div class="flow-root">
               <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="min-w-full py-2 align-middle sm:px-6 lg:px-8">
                   <table class="min-w-full divide-y divide-gray-300">
@@ -52,12 +64,7 @@
                         >
                           Date
                         </th>
-                        <th
-                          scope="col"
-                          class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                        >
-                          Number
-                        </th>
+
                         <th
                           scope="col"
                           class="text-left text-sm font-semibold text-gray-900 sm:pl-0"
@@ -76,20 +83,22 @@
                         >
                           Slug
                         </th>
+                        <th
+                          scope="col"
+                          class="text-center text-sm font-semibold text-gray-900 sm:pl-0 w-36"
+                        >
+                          Actions
+                        </th>
                       </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
-                      <tr v-for="item in items" :key="item">
+                      <tr v-for="item in pageOfOrders" :key="item">
                         <td
                           class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
                         >
                           {{ item.createdAt }}
                         </td>
-                        <td
-                          class="whitespace-nowrap px-3 py-4 font-medium text-sm text-gray-700"
-                        >
-                          # {{ item.item_number }}
-                        </td>
+
                         <td
                           class="whitespace-nowrap px-3 py-4 font-medium text-sm text-gray-700"
                         >
@@ -103,31 +112,17 @@
                         <td
                           class="whitespace-nowrap px-3 py-4 font-medium text-sm text-gray-700"
                         >
-                          <div></div>
-                        </td>
-                        <td
-                          class="whitespace-nowrap px-3 py-4 font-medium  text-sm text-gray-700"
-                        >
                           <div>{{ item.slug }}</div>
                         </td>
                         <td
-                          class="whitespace-nowrap px-3 py-4  text-sm text-gray-700"
-                        >
-                          <div>{{}}</div>
-                        </td>
-                        <td
-                          class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"
+                          class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0 flex gap-x-2"
                         >
                           <a
-                            @click="removeItem"
+                            @click="removeItem(item.id)"
                             class="bg-violet-600 cursor-pointer text-white px-4 py-1 rounded-sm"
                           >
                             Delete
                           </a>
-                        </td>
-                        <td
-                          class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"
-                        >
                           <a
                             :href="`/admin/product/${item.id}`"
                             class="bg-violet-600 px-4 text-white py-1 rounded-sm"
@@ -139,7 +134,7 @@
                   </table>
 
                   <div
-                    class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6"
+                    class="flex items-center justify-between border-t border-gray-200 bg-white py-3"
                   >
                     <div class="flex flex-1 justify-between sm:hidden">
                       <a
@@ -183,7 +178,7 @@
                             class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
                             :class="currentPage === 1 ? 'opacity-50' : ''"
                             :disabled="currentPage === 1"
-                            @click="currentPage -= 1"
+                            @click.prevent="currentPage -= 1"
                           >
                             <span class="sr-only">Previous</span>
                             <ChevronLeftIcon
@@ -193,7 +188,7 @@
                           </button>
                           <!-- Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" -->
                           <a
-                            @click="currentPage = page"
+                            @click.prevent="currentPage = page"
                             href="#"
                             aria-current="page"
                             :class="
@@ -210,7 +205,7 @@
                             class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
                             :class="currentPage === pages ? 'opacity-50' : ''"
                             :disabled="currentPage === pages"
-                            @click="currentPage += 1"
+                            @click.prevent="currentPage += 1"
                           >
                             <span class="sr-only">Next</span>
                             <ChevronRightIcon
@@ -261,7 +256,7 @@ export default {
   },
   data() {
     return {
-      recordsPerPage: 6,
+      recordsPerPage: 5,
       currentPage: 1,
       items: [],
     };
@@ -278,18 +273,22 @@ export default {
       });
       this.items = response.data.items;
     },
-    async removeItem() {
-      await axios.delete(
-        "http://localhost:8081/admin/items/" + this.$route.params.id,
-
-        {
-          headers: {
-            Authorization: this.client ? "Bearer " + this.client.token : null,
-          },
-        }
+    async removeItem(itemId) {
+      const confirmDelete = confirm(
+        "Are you sure you want to delete this item?"
       );
-      this.loadData();
-      this.items.id;
+      if (confirmDelete) {
+        await axios.delete(
+          "http://localhost:8081/admin/items/" + itemId,
+
+          {
+            headers: {
+              Authorization: this.client ? "Bearer " + this.client.token : null,
+            },
+          }
+        );
+        this.loadData();
+      }
     },
   },
 };
