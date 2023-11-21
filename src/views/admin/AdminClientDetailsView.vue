@@ -7,7 +7,7 @@
         :client="client"
         class="col-span-1"
       ></admin-menu-component>
-      <div class="bg-white mt-5 p-10 rounded-md">
+      <div class="bg-white border border-slate-600 mt-5 p-10 rounded-md">
         <form action="#" method="POST" class="ml-10">
           <div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
             <div>
@@ -60,7 +60,7 @@
               </div>
             </div>
             <div class="sm:col-span-2">
-              <label class="block text-sm font-semibold leading-6 text-gray-900"
+              <label class="block text-sm font-semibold text-gray-900"
                 >Phone number</label
               >
               <div class="mt-2.5">
@@ -74,7 +74,7 @@
             <div class="sm:col-span-2">
               <label
                 for="phone-number"
-                class="block text-sm font-semibold leading-6 text-gray-900"
+                class="block text-sm font-semibold text-gray-900"
                 >Address</label
               >
               <div class="relative mt-2.5">
@@ -98,18 +98,32 @@
                 />
               </div>
             </div>
-            <div class="sm:col-span-2"></div>
-            <button
-              @click="save"
-              type="button"
-              class="px-3 py-2 rounded-md text-white hover:bg-slate-400 duration-200 bg-violet-700"
-            >
-              Save Changes
-            </button>
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-semibold leading-6 text-gray-900"
+                >Postal Code</label
+              >
+              <div class="relative mt-2.5">
+                <input
+                  v-model="clientDetails.postal_code"
+                  class="block w-30 rounded-md border-0 px-3.5 py-2 pl-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div class="px-24">
+              <button
+                @click="save"
+                type="button"
+                class="px-8 py-2 rounded-md text-white text-bold hover:bg-slate-400 duration-200 bg-violet-700"
+              >
+                Save
+              </button>
+            </div>
           </div>
         </form>
       </div>
-      <admin-orders-grid-view :orders="orders" />
+      <div class="flex">
+        <admin-orders-grid-view :orders="orders" />
+      </div>
     </div>
   </div>
 </template>
@@ -127,7 +141,7 @@ export default {
   data() {
     return {
       clientDetails: {},
-      orders: []
+      orders: [],
     };
   },
   async mounted() {
@@ -174,7 +188,7 @@ export default {
         Toastify({
           text: "Tus cambios han sido guardados!",
           position: "center",
-          duration: 10000,
+          duration: 1000,
         }).showToast();
       }
     },

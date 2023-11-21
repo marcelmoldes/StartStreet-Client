@@ -29,8 +29,9 @@
         <select
           class="mt-2 text-center bg-white rounded-md border-0 py-1.5 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
         >
-          <a href=""></a><option v-for="page in pages" :key="page" @click="currentPage = page">
-            Show 
+          <a href=""></a>
+          <option v-for="page in pages" :key="page" @click="currentPage = page">
+            Show
           </option>
         </select>
         <div class="bg-white mt-4 p-4 rounded-sm">
@@ -59,97 +60,47 @@
                           scope="col"
                           class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                         >
-                          Number
-                        </th>
-                        <th
-                          scope="col"
-                          class="text-left text-sm font-semibold text-gray-900 sm:pl-0"
-                        >
-                          Email
+                          Title
                         </th>
                         <th
                           scope="col"
                           class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                         >
-                          Total
+                            Slug
                         </th>
-                        <th
-                          scope="col"
-                          class="text-left text-sm font-semibold text-gray-900 sm:pl-0"
-                        >
-                          Shipping Status
-                        </th>
+
                         <th
                           scope="col"
                           class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                         >
-                          Shipping Company
+                            Images
                         </th>
-                        <th
-                          scope="col"
-                          class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                        >
-                          Tracking Number
-                        </th>
-                        <th
-                          scope="col"
-                          class="relative py-3.5 pl-3 pr-4 sm:pr-0"
-                        ></th>
                       </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
-                      <tr v-for="order in pageOfOrders" :key="order">
+                      <tr v-for="categorie in pageOfOrders" :key="categorie">
                         <td
                           class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
                         >
-                          {{ order.createdAt }}
+                          {{ categorie.createdAt }}
                         </td>
                         <td
                           class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
                         >
-                          # {{ order.order_number }}
+                           {{ categorie.title }}
                         </td>
-                        <td
-                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                        >
-                          {{ order.email }}
-                        </td>
-                        <td
-                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                        >
-                          $ {{ order.total }}
-                        </td>
-                        <td
-                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                        >
-                          <div>
-                            {{ order.shipping_status }}
-                          </div>
-                        </td>
-                        <td
-                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                        >
-                          <div>
-                            {{ order.shipping_company }}
-                          </div>
-                        </td>
-                        <td
-                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
-                        >
-                          <div>
-                            {{ order.tracking_number }}
-                          </div>
-                        </td>
+
                         <td
                           class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"
-                        >
-                          <a
-                            :href="`/admin/orders/${order.id}`"
-                            class="bg-violet-600 px-3 py-1 rounded-sm"
-                            >View</a
-                          >
-                        </td>
+                        >{{ categorie.slug }}</td>
+
+
+                        <td
+                          class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"
+                        >   <a :src="categorie.photo_url"></a> </td>         
                       </tr>
+
+
                     </tbody>
                   </table>
 
@@ -183,7 +134,9 @@
 
                           of
 
-                          <span class="font-medium">{{ orders.length }}</span>
+                          <span class="font-medium">{{
+                            categories.length
+                          }}</span>
 
                           results
                         </p>
@@ -257,7 +210,7 @@ export default {
   components: { AdminMenuComponent, ChevronRightIcon, ChevronLeftIcon },
   computed: {
     pageOfOrders() {
-      return this.orders.slice(this.startingAt - 1, this.endingAt);
+      return this.categories.slice(this.startingAt - 1, this.endingAt);
     },
     startingAt() {
       return (this.currentPage - 1) * this.recordsPerPage + 1;
@@ -265,13 +218,13 @@ export default {
     endingAt() {
       const endingAt =
         (this.currentPage - 1) * this.recordsPerPage + this.recordsPerPage;
-      if (endingAt > this.orders.length) {
-        return this.orders.length;
+      if (endingAt > this.categories.length) {
+        return this.categories.length;
       }
       return endingAt;
     },
     pages() {
-      return Math.ceil(this.orders.length / this.recordsPerPage);
+      return Math.ceil(this.categories.length / this.recordsPerPage);
     },
     y() {
       return this.recordsPerPage;
@@ -281,7 +234,7 @@ export default {
     return {
       recordsPerPage: 6,
       currentPage: 1,
-      orders: [],
+      categories: [],
     };
   },
   async mounted() {
@@ -289,12 +242,12 @@ export default {
   },
   methods: {
     async loadData() {
-      let response = await axios.get("http://localhost:8081/orders", {
+      let response = await axios.get("http://localhost:8081/categories", {
         headers: {
           Authorization: this.client ? "Bearer " + this.client.token : null,
         },
       });
-      this.orders = response.data.orders;
+      this.categories = response.data.categories;
     },
   },
 };

@@ -135,8 +135,8 @@
                         >
                           <a
                             :href="`/admin/orders/${order.id}`"
-                            class="bg-violet-600 px-3 py-1 rounded-sm"
-                            >View</a
+                            class="bg-violet-600 text-white px-3 py-1 rounded-sm"
+                            >Edit</a
                           >
                         </td>
                       </tr>

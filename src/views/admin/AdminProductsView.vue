@@ -10,30 +10,20 @@
 
       <div class="py-4 col-span-3 mr-12">
         <h1 class="text-xl font-bold">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6 mr-2 inline"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M2.25 13.5h3.86a2.25 2.25 0 012.012 1.244l.256.512a2.25 2.25 0 002.013 1.244h3.218a2.25 2.25 0 002.013-1.244l.256-.512a2.25 2.25 0 012.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 00-2.15-1.588H6.911a2.25 2.25 0 00-2.15 1.588L2.35 13.177a2.25 2.25 0 00-.1.661z"
-            />
-          </svg>
+    
           Manage Products
         </h1>
         <select
-          class="mt-2 text-center bg-white rounded-md border-0 py-1.5 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          v-model="recordsPerPage"
+          id="location"
+          name="location"
+          class="mt-2 block w-30 rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
         >
-          <a href=""></a>
-          <option v-for="page in pages" :key="page" @click="currentPage = page">
-            Show
-          </option>
+          <option>5</option>
+          <option selected="">20</option>
+          <option>30</option>
         </select>
+
         <div class="bg-white mt-4 p-4 rounded-sm">
           <div class="px-4 sm:px-6 lg:px-8">
             <div class="sm:flex sm:items-center">
@@ -42,6 +32,12 @@
                   Products
                 </h1>
               </div>
+              <button
+                @click="this.$router.push('/admin/addproduct')"
+                class="bg-violet-400 text-white font-bold px-7 py-1"
+              >
+                Add Product
+              </button>
               <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none"></div>
             </div>
             <div class="mt-8 flow-root">
@@ -66,88 +62,76 @@
                           scope="col"
                           class="text-left text-sm font-semibold text-gray-900 sm:pl-0"
                         >
-                          Email
+                          Title
                         </th>
                         <th
                           scope="col"
                           class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                         >
-                          Total
+                          Price
                         </th>
                         <th
                           scope="col"
                           class="text-left text-sm font-semibold text-gray-900 sm:pl-0"
                         >
-                          Shipping Status
+                          Slug
                         </th>
-                        <th
-                          scope="col"
-                          class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                        >
-                          Shipping Company
-                        </th>
-                        <th
-                          scope="col"
-                          class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                        >
-                          Tracking Number
-                        </th>
-                        <th
-                          scope="col"
-                          class="relative py-3.5 pl-3 pr-4 sm:pr-0"
-                        ></th>
                       </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
-                      <tr v-for="order in pageOfOrders" :key="order">
+                      <tr v-for="item in items" :key="item">
                         <td
                           class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"
                         >
-                          {{ order.createdAt }}
+                          {{ item.createdAt }}
                         </td>
                         <td
-                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                          class="whitespace-nowrap px-3 py-4 font-medium text-sm text-gray-700"
                         >
-                          # {{ order.order_number }}
+                          # {{ item.item_number }}
                         </td>
                         <td
-                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                          class="whitespace-nowrap px-3 py-4 font-medium text-sm text-gray-700"
                         >
-                          {{ order.email }}
+                          {{ item.title }}
                         </td>
                         <td
-                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                          class="whitespace-nowrap px-3 font-medium py-4 text-sm text-gray-700"
                         >
-                          $ {{ order.total }}
+                          $ {{ item.price }}
                         </td>
                         <td
-                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                          class="whitespace-nowrap px-3 py-4 font-medium text-sm text-gray-700"
                         >
-                          <div>
-                            {{ order.shipping_status }}
-                          </div>
+                          <div></div>
                         </td>
                         <td
-                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                          class="whitespace-nowrap px-3 py-4 font-medium  text-sm text-gray-700"
                         >
-                          <div>
-                            {{ order.shipping_company }}
-                          </div>
+                          <div>{{ item.slug }}</div>
                         </td>
                         <td
-                          class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"
+                          class="whitespace-nowrap px-3 py-4  text-sm text-gray-700"
                         >
-                          <div>
-                            {{ order.tracking_number }}
-                          </div>
+                          <div>{{}}</div>
                         </td>
                         <td
                           class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"
                         >
                           <a
-                            :href="`/admin/orders/${order.id}`"
-                            class="bg-violet-600 px-3 py-1 rounded-sm"
-                            >View</a
+                            @click="removeItem"
+                            class="bg-violet-600 cursor-pointer text-white px-4 py-1 rounded-sm"
+                          >
+                            Delete
+                          </a>
+                        </td>
+                        <td
+                          class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0"
+                        >
+                          <a
+                            :href="`/admin/product/${item.id}`"
+                            class="bg-violet-600 px-4 text-white py-1 rounded-sm"
+                            >Edit</a
                           >
                         </td>
                       </tr>
@@ -184,7 +168,7 @@
 
                           of
 
-                          <span class="font-medium">{{ orders.length }}</span>
+                          <span class="font-medium">{{ items.length }}</span>
 
                           results
                         </p>
@@ -254,11 +238,11 @@ import axios from "axios";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/vue/20/solid";
 import AdminMenuComponent from "@/components/AdminMenuComponent.vue";
 export default {
-  props: ["client"],
+  props: ["client", "itemId"],
   components: { AdminMenuComponent, ChevronRightIcon, ChevronLeftIcon },
   computed: {
     pageOfOrders() {
-      return this.orders.slice(this.startingAt - 1, this.endingAt);
+      return this.items.slice(this.startingAt - 1, this.endingAt);
     },
     startingAt() {
       return (this.currentPage - 1) * this.recordsPerPage + 1;
@@ -266,23 +250,20 @@ export default {
     endingAt() {
       const endingAt =
         (this.currentPage - 1) * this.recordsPerPage + this.recordsPerPage;
-      if (endingAt > this.orders.length) {
-        return this.orders.length;
+      if (endingAt > this.items.length) {
+        return this.items.length;
       }
       return endingAt;
     },
     pages() {
-      return Math.ceil(this.orders.length / this.recordsPerPage);
-    },
-    y() {
-      return this.recordsPerPage;
+      return Math.ceil(this.items.length / this.recordsPerPage);
     },
   },
   data() {
     return {
       recordsPerPage: 6,
       currentPage: 1,
-      orders: [],
+      items: [],
     };
   },
   async mounted() {
@@ -290,12 +271,25 @@ export default {
   },
   methods: {
     async loadData() {
-      let response = await axios.get("http://localhost:8081/orders", {
+      let response = await axios.get("http://localhost:8081/admin/items", {
         headers: {
           Authorization: this.client ? "Bearer " + this.client.token : null,
         },
       });
-      this.orders = response.data.orders;
+      this.items = response.data.items;
+    },
+    async removeItem() {
+      await axios.delete(
+        "http://localhost:8081/admin/items/" + this.$route.params.id,
+
+        {
+          headers: {
+            Authorization: this.client ? "Bearer " + this.client.token : null,
+          },
+        }
+      );
+      this.loadData();
+      this.items.id;
     },
   },
 };
