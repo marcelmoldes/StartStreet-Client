@@ -18,7 +18,10 @@ import AdminCategoriesView from "@/views/admin/AdminCategoriesView.vue";
 import AdminOrderDetailsView from "@/views/admin/AdminOrderDetailsView.vue";
 import AdminClientDetailsView from "@/views/admin/AdminClientDetailsView.vue";
 import AdminAddProductView from "@/views/admin/AdminAddProductView.vue";
-import AdminProductDetailsView from "@/views/admin/AdminProductDetailsView.vue"
+import AdminProductDetailsView from "@/views/admin/AdminProductDetailsView.vue";
+import AdminCategoryDetailsView from "@/views/admin/AdminCategoryDetailsView.vue";
+import AdminAddCategoryView from "@/views/admin/AdminAddCategoryView.vue";
+
 const routes = [
   {
     path: "/login",
@@ -119,6 +122,16 @@ const routes = [
     path: "/admin/product/:id",
     name: "admin-product-details",
     component: AdminProductDetailsView,
+  },
+  {
+    path: "/admin/category/:id",
+    name: "admin-category-details",
+    component: AdminCategoryDetailsView,
+  },
+  {
+    path: "/admin/addcategory",
+    name: "admin-add-category",
+    component: AdminAddCategoryView,
   },
 ];
 
