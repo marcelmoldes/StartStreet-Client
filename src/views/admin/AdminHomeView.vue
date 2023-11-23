@@ -12,7 +12,6 @@
         <h1 class="text-xl font-bold">Admin Dashboard</h1>
         <div class="bg-white mt-4 p-4 rounded-sm">
           <h1 class="font-bold">Sales Summary</h1>
-
           <div>
             <dl
               class="mx-auto grid grid-cols-1 gap-px bg-gray-900/5 sm:grid-cols-2 lg:grid-cols-4"
@@ -63,11 +62,10 @@
               </div>
             </dl>
           </div>
-          <img
-            class="p-1"
-            src="https://slidebazaar.com/wp-content/uploads/2016/07/Sales-Dashboard-Powerpoint-and-Keynote-template.jpg"
-            alt="gg"
-          />
+          <div>
+          <h1 class="font-bold">Store Statistics</h1>
+            <canvas id="ordersChart"></canvas>
+          </div>
         </div>
       </div>
     </div>
@@ -77,6 +75,8 @@
   <script>
 import axios from "axios";
 import AdminMenuComponent from "@/components/AdminMenuComponent.vue";
+import Chart from "chart.js/auto";
+
 export default {
   props: ["client"],
   components: { AdminMenuComponent },
@@ -87,6 +87,7 @@ export default {
   },
   async mounted() {
     await this.loadData();
+    this.drawOrdersChart();
   },
   methods: {
     async loadData() {
@@ -96,6 +97,46 @@ export default {
         },
       });
       this.stats = response.data.stats;
+    },
+    drawOrdersChart() {
+      const orders = [
+        { year: 2010, sales: 10, returns: 2 },
+        { year: 2011, sales: 20, returns: 4 },
+        { year: 2012, sales: 15, returns: 3 },
+        { year: 2013, sales: 25, returns: 3 },
+        { year: 2014, sales: 22, returns: 5 },
+        { year: 2015, sales: 30, returns: 2 },
+        { year: 2016, sales: 28, returns: 6 },
+      ];
+
+      const labels = orders.map((object) => {
+        return object.year;
+      });
+
+      const sales = orders.map((object) => {
+        return object.sales;
+      });
+
+      const returns = orders.map((object) => {
+        return object.returns;
+      });
+
+      new Chart(document.getElementById("ordersChart"), {
+        type: "line",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "Sales by year",
+              data: sales,
+            },
+            {
+              label: "Returns by year",
+              data: returns,
+            },
+          ],
+        },
+      });
     },
   },
 };

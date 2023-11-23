@@ -10,7 +10,7 @@
 
       <div class="py-4 col-span-3 mr-12">
         <div class="flex items-center justify-between">
-          <h1 class="text-xl font-bold">Manage Products</h1>
+          <h1 class="text-xl font-bold">Manage Categories</h1>
 
           <button
             @click="this.$router.push('/admin/addcategory')"
@@ -76,7 +76,7 @@
                           scope="col"
                           class="text-left text-sm font-semibold text-gray-900 sm:pl-0"
                         >
-                          Descrption
+                          Description
                         </th>
 
                         <th
@@ -112,9 +112,7 @@
                         >
                           {{ category.description }}
                         </td>
-                        <td
-                          class="whitespace-nowrap px-3 font-medium py-4 text-sm text-gray-700"
-                        ></td>
+
                         <td
                           class="whitespace-nowrap px-3 py-4 font-medium text-sm text-gray-700"
                         >
@@ -123,18 +121,19 @@
                         <td
                           class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0 flex gap-x-2"
                         >
-                        <a
-                          @click="removeCategory(category.id)"
-                          class="bg-violet-600 cursor-pointer text-white px-4 py-1 rounded-sm"
-                        >
-                          Delete
-                        </a>
-                        <a
+                          <a
+                            @click="removeCategory(category.id)"
+                            class="bg-violet-600 cursor-pointer text-white px-4 py-1 rounded-sm"
+                          >
+                            Delete
+                          </a>
+                          <a
                             :href="`/admin/category/${category.id}`"
                             class="bg-violet-600 px-4 text-white py-1 rounded-sm"
                             >Edit</a
                           >
-                      </td></tr>
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
 

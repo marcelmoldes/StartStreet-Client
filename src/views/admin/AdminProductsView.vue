@@ -79,13 +79,13 @@
                         </th>
                         <th
                           scope="col"
-                          class="text-left text-sm font-semibold text-gray-900 sm:pl-0"
+                          class="text-left text-sm font-semibold text-gray-900 sm:pl-0 "
                         >
                           Slug
                         </th>
                         <th
                           scope="col"
-                          class="text-center text-sm font-semibold text-gray-900 sm:pl-0 w-36"
+                          class="text-center  text-sm font-semibold text-gray-900 sm:pl-0 "
                         >
                           Actions
                         </th>
