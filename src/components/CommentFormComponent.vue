@@ -1,14 +1,15 @@
 <template>
   <div class="mt-10">
-   
-    
-      
-      <div>
-         <form class="review-form">
+    <div>
+      <form class="review-form">
         <h3 class="text-lg font-serif m-4">Leave a review</h3>
 
         <label for="review">Review</label>
-        <textarea class="bg-gray-200" id="review" v-model="comment.message"></textarea>
+        <textarea
+          class="bg-gray-200"
+          id="review"
+          v-model="comment.message"
+        ></textarea>
 
         <label class="mt-3" for="rating">Rating</label>
         <select id="rating" v-model.number="rating">
@@ -27,19 +28,19 @@
         </select>
         <!-- solution -->
 
-        <button type="button" @click="client ? postComment() : $router.push('/login')" class="bg-black mt-4 p-2 rounded-lg text-white w-143">
+        <button
+          type="button"
+          @click="client ? postComment() : $router.push('/login')"
+          class="bg-black mt-4 p-2 rounded-lg text-white w-143"
+        >
           Send Review
         </button>
       </form>
       <span v-if="v$.comment.message.$error" class="text-sm text-cyan-950">
         {{ v$.comment.message.$errors[0].$message }}
       </span>
-      </div>
-     
-
     </div>
-  
-
+  </div>
 </template>
 
 <script>

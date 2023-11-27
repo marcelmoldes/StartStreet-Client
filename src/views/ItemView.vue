@@ -2,6 +2,7 @@
   <div
     class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8"
   >
+    
     <item-details-component
       :client="client"
       :item="item"
@@ -10,11 +11,8 @@
       @removeFavorite="removeFavorite($event)"
       @viewCart="$emit('viewCart')"
     />
-    <comment-form-component
-      :client="client"
-      :item_id="item.id"
-      @commentSend="loadData($event)"
-    />
+  
+   
     <comment-card-component
       :client="client"
       :item="item"
@@ -28,14 +26,13 @@
 import axios from "axios";
 import CommentCardComponent from "../components/CommentCardComponent.vue";
 import ItemDetailsComponent from "../components/ItemDetailsComponent.vue";
-import CommentFormComponent from "../components/CommentFormComponent.vue";
 
 export default {
   props: ["client", "commentId", "itemId"],
   components: {
     ItemDetailsComponent,
     CommentCardComponent,
-    CommentFormComponent,
+   
   },
   data() {
     return {

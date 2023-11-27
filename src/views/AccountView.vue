@@ -2,21 +2,21 @@
   <div id="account" class="mt-10">
     <form>
       <div
-        class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-4"
+        class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-4 "
       >
         <account-menu-component :client="client" class="col-span-1"></account-menu-component>
 
         <div
-          class="grid max-w-2xl mt-10 grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-3"
+          class="grid max-w-2xl mt-10 grid-cols-1 gap-x-6 gap-y-8 p sm:grid-cols-6 md:col-span-3 rounded-md  border border-slate-600  bg-white "
         >
           <div
-            class="inline-block mt-3 text-center bg-red-600 text-white p-1 rounded-lg"
+            class="inline-block mt-3 text-center bg-red-600 text-white  rounded-lg"
             v-if="error"
           >
             Ha habido un error, por favor verifica tu informacion y intentalo de
             nuevo.
           </div>
-          <div class="sm:col-span-4">
+          <div class="sm:col-span-4 ">
             <label
               for="website"
               class="block text-xl font-medium leading-6 text-gray-900"
@@ -42,9 +42,9 @@
         
               </div>
 
-              <div class="flex mt-6 gap-x-2">
+              <div class="flex mt-6 gap-x-2 ">
                 <span
-                  class="flex select-none items-center pl-3 font-semibold sm:text-sm"
+                  class="flex items-center pl-3 font-semibold sm:text-sm"
                   >First Name</span
                 >
                 <input
@@ -68,7 +68,7 @@
                 <input
                   v-model="clientAccount.last_name"
                   type="text"
-                  class="block rounded-md shadow-sm ring-gray-300 ring-1 flex-1 border-0 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-black sm:text-sm sm:leading-6"
+                  class=" rounded-md shadow-sm ring-gray-300 ring-1 flex-1 border-0 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-black "
                 />
                 <span
                   v-if="v$.clientAccount.last_name.$error"
@@ -80,7 +80,7 @@
               <div class="mt-2">
                 <div class="flex mt-6 gap-x-2">
                   <span
-                    class="flex select-none items-center pl-3 font-semibold sm:text-sm"
+                    class=" items-center pl-3 font-semibold sm:text-sm"
                     :value="clientAccount.address"
                     >Address</span
                   >

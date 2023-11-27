@@ -467,6 +467,7 @@
   </main>
 </template>
 <script>
+
 import axios from "axios";
 import { useVuelidate } from "@vuelidate/core";
 import { required, email, minLength, maxLength } from "@vuelidate/validators";
@@ -483,19 +484,19 @@ export default {
   data() {
     return {
       order: {
-        email: "marcel.moldes@gmail.com",
-        first_name: "jyjygjgy",
-        last_name: "jyjygjgy",
-        phone: "777777",
-        address: "hfthasdasdas",
-        city: "tfhfththtf",
-        state: "tfhtfhfth",
+        email: "mol@gmail.com",
+        first_name: "marcelo",
+        last_name: "molsdeos",
+        phone: "666666666",
+        address: "dfrsgtrrhthtrhrt",
+        city: "ththr6hr6hr6",
+        state: "h6r6h6rhr6h",
 
-        postal_code: "7677",
-        card_name: "htfhfhfthtf",
-        card_number: "576767657",
-        expiration_date: "6767",
-        cvc: "7676",
+        postal_code: "5656",
+        card_name: "gthtyhyft",
+        card_number: "546546546546",
+        expiration_date: "4464",
+        cvc: "444",
       },
       paymentError: false,
 
@@ -578,6 +579,7 @@ export default {
         },
       },
     };
+
   },
   async mounted() {
     await this.loadData();
@@ -603,7 +605,9 @@ export default {
     async submitOrder() {
       this.v$.$validate();
       if (!this.v$.$error) {
+    
         this.paymentError = false;
+
         const response = await axios.post(
           "http://localhost:8081/order",
 
@@ -628,10 +632,11 @@ export default {
               Authorization: this.client ? "Bearer " + this.client.token : null,
             },
           }
-        );
+        );    
 
         if (response.data.success) {
           this.$emit("orderSuccessful", response.data.order);
+          
         } else {
           this.paymentError = true;
         }

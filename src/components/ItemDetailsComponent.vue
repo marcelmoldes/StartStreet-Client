@@ -30,7 +30,7 @@
       </div>
       <TabPanels class="aspect-h-1 aspect-w-1 w-full">
         <TabPanel v-for="image in item.images" :key="image.id">
-          <img :src="image.url" class="h-full w-full" />
+          <img :src="image.url" class="h-full w-82" />
         </TabPanel>
       </TabPanels>
     </TabGroup>
@@ -44,11 +44,7 @@
         <div class="mt-6">
           <div class="space-y-6 text-base text-gray-700" />
         </div>
-        <div class="text-lg text-gray-600 font-bold">
-          <h1 class="" v-if="inventory > 10">In Stock</h1>
-          <p v-else-if="inventory <= 10 && inventory > 0">Almost Sold Out</p>
-          <h1 v-else>Out of Stock</h1>
-        </div>
+
         <h1 class="text-xl text-blue-500">
           You have {{ cart }} items in your cart
         </h1>
@@ -58,9 +54,9 @@
           <div class="flex items-center justify-between">
             <h2 class="text-lg font-medium text-gray-900">Size</h2>
           </div>
-
+   
           <RadioGroup v-model="selectedSize" class="mt-2">
-            <RadioGroupLabel class="sr-only">Choose a size</RadioGroupLabel>
+  
             <div class="grid grid-cols-3 gap-3 sm:grid-cols-6">
               <RadioGroupOption
                 as="template"
@@ -88,8 +84,6 @@
         <form class="mt-6">
           <div class="mt-10 flex">
             <button
-              :class="{ disabled_button: !inStock }"
-              :disabled="!inStock"
               type="button"
               class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-black px-8 py-3 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 sm:w-full"
               @click="addToCart"
@@ -115,38 +109,21 @@
             </button>
           </div>
           <ul class="mt-7">
-            <li
-              class="text-lg font-semibold"
-              v-for="detail in details"
-              :key="detail"
-            >
-              {{ detail }}
+            <li class="text-lg font-semibold">
+              {{ item.details }}
             </li>
           </ul>
-          <div class="mt-8">
-            <ul>
-              <li
-                @mouseover="updateVariant(index)"
-                :style="{ backgroundColor: variant.color }"
-                class="color_circle"
-                v-for="(variant, index) in variants"
-                :key="variant.id"
-              >
-                {{ variant.color }}
-              </li>
-            </ul>
-          </div>
         </form>
+      </div>       <comment-form-component       :client="client"
+      :item_id="item.id"
+      @commentSend="loadData($event)"></comment-form-component>
 
-      
-        
-      </div>
     </div>
   </div>
 </template>
     
   <script>
-
+  import CommentFormComponent from "./CommentFormComponent.vue";
 import axios from "axios";
 import { HeartIcon } from "@heroicons/vue/24/outline";
 import { HeartIcon as HeartIconSolid } from "@heroicons/vue/20/solid";
@@ -154,40 +131,8 @@ import { HeartIcon as HeartIconSolid } from "@heroicons/vue/20/solid";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/vue";
 
 export default {
-  
   data() {
     return {
-      name: "",
-      review: "",
-      rating: null,
-      selectedVariant: 0,
-      cart: 0,
-      inventory: 0,
-
-      details: ["70% cotton", "30% polyester"],
-      variants: [
-        {
-          id: 1,
-          color: "white",
-          image:
-            "https://img01.ztat.net/article/spp-media-p1/954056dd0577401283bdb3615f2821bc/5585ddd4d9a34320ab186147f724a424.jpg?imwidth=300",
-          quantity: 100,
-        },
-        {
-          id: 2,
-          color: "red",
-          image:
-            "https://img01.ztat.net/article/spp-media-p1/5aa95d7b494e4291b8e8d531ea98c619/f18f88a1565748b3b3fe2bb5178e232f.jpg?imwidth=300",
-          quantity: 3,
-        },
-        {
-          id: 3,
-          color: "black",
-          image:
-            "https://img01.ztat.net/article/spp-media-p1/9486bf7e3b134b2a8dc7ad1133f7f5f8/bf693d785d8e494f80d315b0e68ce4ed.jpg?imwidth=300",
-          quantity: 0,
-        },
-      ],
       reviews: [],
 
       sizes: [
@@ -208,8 +153,7 @@ export default {
     TabPanels,
     HeartIcon,
     HeartIconSolid,
-    
-
+    CommentFormComponent
   },
   props: ["item", "client"],
   emits: ["setFavorite", "removeFavorite", "viewCart"],
@@ -235,27 +179,6 @@ export default {
     updateVariant(index) {
       this.selectedVariant = index;
     },
-    onSubmit() {
-      let productReview = {
-        name: this.name,
-        review: this.review,
-        rating: this.rating,
-      };
-      this.$emit("review-submitted", productReview);
-
-      (this.name = ""), (this.review = ""), (this.rating = null);
-    },
-    addReview(review) {
-      this.reviews.push(review);
-    },
-  },
-  computed: {
-    image() {
-      return this.variants[this.selectedVariant].image;
-    },
-    inStock() {
-      return this.variants[this.selectedVariant].quantity;
-    },
   },
 };
 </script>
@@ -272,7 +195,6 @@ export default {
   background-color: gray;
   cursor: not-allowed;
 }
-
 
 body {
   background-image: url(../assets/images/whitecover.jpg);

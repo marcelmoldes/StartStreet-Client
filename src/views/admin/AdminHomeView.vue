@@ -63,8 +63,12 @@
             </dl>
           </div>
           <div>
-          <h1 class="font-bold">Store Statistics</h1>
+            <h1 class="font-bold">Store Statistics</h1>
             <canvas id="ordersChart"></canvas>
+          </div>
+          <div>
+            <h1 class="font-bold">Clients Statistics</h1>
+            <canvas class="text-lg font-bold" id="clientsChart"></canvas>
           </div>
         </div>
       </div>
@@ -83,11 +87,13 @@ export default {
   data() {
     return {
       stats: {},
+      clients: {},
     };
   },
   async mounted() {
     await this.loadData();
     this.drawOrdersChart();
+    this.drawClientsChart();
   },
   methods: {
     async loadData() {
@@ -98,27 +104,21 @@ export default {
       });
       this.stats = response.data.stats;
     },
-    drawOrdersChart() {
-      const orders = [
-        { year: 2010, sales: 10, returns: 2 },
-        { year: 2011, sales: 20, returns: 4 },
-        { year: 2012, sales: 15, returns: 3 },
-        { year: 2013, sales: 25, returns: 3 },
-        { year: 2014, sales: 22, returns: 5 },
-        { year: 2015, sales: 30, returns: 2 },
-        { year: 2016, sales: 28, returns: 6 },
-      ];
-
-      const labels = orders.map((object) => {
-        return object.year;
+    async drawOrdersChart() {
+      const response = await axios.get("http://localhost:8081/admin/stats", {
+        headers: {
+          Authorization: this.client ? "Bearer " + this.client.token : null,
+        },
       });
 
-      const sales = orders.map((object) => {
-        return object.sales;
+      const stats = response.data.stats;
+
+      const labels = stats.map((object) => {
+        return object.label;
       });
 
-      const returns = orders.map((object) => {
-        return object.returns;
+      const total = stats.map((object) => {
+        return object.total;
       });
 
       new Chart(document.getElementById("ordersChart"), {
@@ -127,12 +127,38 @@ export default {
           labels,
           datasets: [
             {
-              label: "Sales by year",
-              data: sales,
+              label: "Revenue by year",
+              data: total,
             },
+          ],
+        },
+      });
+    },
+    async drawClientsChart() {
+      const response = await axios.get("http://localhost:8081/admin/clients", {
+        headers: {
+          Authorization: this.client ? "Bearer " + this.client.token : null,
+        },
+      });
+
+      const clients = response.data.clients;
+
+      const labels = clients.map((object) => {
+        return object.label;
+      });
+
+      const id = clients.map((object) => {
+        return object.id;
+      });
+
+      new Chart(document.getElementById("clientsChart"), {
+        type: "bar",
+        data: {
+          labels,
+          datasets: [
             {
-              label: "Returns by year",
-              data: returns,
+              label: "Clients registered by year",
+              data: id,
             },
           ],
         },
