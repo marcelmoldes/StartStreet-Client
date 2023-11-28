@@ -1,11 +1,11 @@
 <template>
-
-   <div>    <header-section
-      @logout="logClientOut"
-      @viewCart="shoppingCartOpen = true"
-      :client="client"
-      :category="category"
-    ></header-section>
+  <header-section
+    @logout="logClientOut"
+    @viewCart="shoppingCartOpen = true"
+    :client="client"
+    
+  ></header-section>
+  <div>
     <router-view
       @clientloggedin="authenticateClient"
       @viewCart="shoppingCartOpen = true"
@@ -50,7 +50,6 @@ export default {
       }
     },
 
-   
     logClientOut() {
       Cookies.remove("client");
       this.client = false;
@@ -60,5 +59,4 @@ export default {
 </script>
 
 <style>
-
 </style>

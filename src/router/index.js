@@ -21,6 +21,7 @@ import AdminAddProductView from "@/views/admin/AdminAddProductView.vue";
 import AdminProductDetailsView from "@/views/admin/AdminProductDetailsView.vue";
 import AdminCategoryDetailsView from "@/views/admin/AdminCategoryDetailsView.vue";
 import AdminAddCategoryView from "@/views/admin/AdminAddCategoryView.vue";
+import ForgotPasswordView from "@/views/ForgotPasswordView.vue";
 
 const routes = [
   {
@@ -132,6 +133,11 @@ const routes = [
     path: "/admin/addcategory",
     name: "admin-add-category",
     component: AdminAddCategoryView,
+  },
+  {
+    path: "/strarstreet/forgotpassword",
+    name: "forgot-password",
+    component: ForgotPasswordView,
   },
 ];
 

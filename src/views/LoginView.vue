@@ -36,6 +36,11 @@
             <label class="block text-sm font-medium leading-6 text-gray-900"
               >Password
             </label>
+            <div class="text-sm">
+              <a href="/strarstreet/forgotpassword" class="font-semibold text-gray-400"
+                >Forgot password?</a
+              >
+            </div>
             <div class="mt-2">
               <input
                 v-model="client.password"

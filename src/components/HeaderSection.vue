@@ -21,7 +21,9 @@
       </div>
 
       <div v-for="category in categories" :key="category">
-        <h1 class="text-center px-3 ml-6 gap-10 font-bold">{{ category.title }}</h1>
+        <h1 class="text-center px-3 ml-6 gap-10 font-bold">
+          {{ category.title }}
+        </h1>
       </div>
 
       <div class="hidden justify-end lg:flex gap-10">
@@ -85,13 +87,7 @@
           <p>Logout</p>
         </button>
 
-        <button
-          class="text-base font-semibold text-gray-900 hover:underline hover:underline-offset-8"
-          @click="$router.push('/admin')"
-          v-if="client.role === 'admin'"
-        >
-          Admin Panel
-        </button>
+       
 
         <button
           v-if="client"
@@ -277,6 +273,12 @@ export default {
     let response = await axios.get("http://localhost:8081/categories");
     this.categories = response.data.categories;
   },
-};
+}; //<button
+        //  class="text-base font-semibold text-gray-900 hover:underline hover:underline-offset-8"
+        //  @click="$router.push('/admin')"
+        //  v-if="client.admin === 'admin'"
+       // >
+        //  Admin Panel
+        //</button>
 </script>
 
