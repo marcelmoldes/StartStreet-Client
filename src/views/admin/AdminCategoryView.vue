@@ -19,43 +19,29 @@
                 <input
                   v-model="category.title"
                   autocomplete="tel"
-                  class="block w-full rounded-md border-0 px-3.5 py-2 pl-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
 
             <div>
-              <label
-                for="last-name"
-                class="block text-sm font-semibold leading-6 text-gray-900"
-                >Slug</label
-              >
               <div class="mt-2.5">
-                <input
-                  v-model="category.slug"
-                  type="text"
-                  name="last-name"
-                  id="last-name"
-                  autocomplete="family-name"
-                  class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div>
-            <div>
-              <label
-                for="last-name"
-                class="block text-sm font-semibold leading-6 text-gray-900"
-                >Description</label
-              >
-              <div class="mt-2.5">
-                <input
-                  v-model="category.description"
-                  type="text"
-                  name="last-name"
-                  id="last-name"
-                  autocomplete="family-name"
-                  class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
+                <div>
+                  <label
+                    for="comment"
+                    class="block text-sm font-medium leading-6 text-gray-900"
+                    >Description</label
+                  >
+                  <div class="mt-2">
+                    <textarea
+                      v-model="category.description"
+                      rows="4"
+                      name="comment"
+                      id="comment"
+                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    ></textarea>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -112,10 +98,15 @@
 </template>
   
   <script>
+import { useVuelidate } from "@vuelidate/core";
+//import { required, email, minLength, maxLength } from "@vuelidate/validators";
 import Toastify from "toastify-js";
 import axios from "axios";
 import AdminMenuComponent from "@/components/AdminMenuComponent.vue";
 export default {
+  setup() {
+    return { v$: useVuelidate() };
+  },
   props: ["client"],
   components: {
     AdminMenuComponent,
@@ -126,12 +117,16 @@ export default {
     };
   },
   async mounted() {
-    await this.loadData();
+    if (this.$route.params.id) {
+      await this.loadData();
+    }
   },
+
   methods: {
     async loadData() {
       let response = await axios.get(
-        "http://localhost:8081/admin/category/" + this.$route.params.id,
+        "http://localhost:8081/admin/category/" +
+          (this.$route.params.id ? this.$route.params.id : this.category.id),
         {
           headers: {
             Authorization: this.client ? "Bearer " + this.client.token : null,
@@ -141,25 +136,42 @@ export default {
       this.category = response.data.category;
     },
     async saveCategory() {
-      let response = await axios.put(
-        "http://localhost:8081/admin/category/" + this.$route.params.id,
-        this.category,
+      let response;
+      let is_new = !this.category.id;
+      if (this.category.id) {
+        response = await axios.put(
+          "http://localhost:8081/admin/category/" + this.category.id,
+          this.category,
 
-        {
-          headers: {
-            Authorization: this.client ? "Bearer " + this.client.token : null,
-          },
-        }
-      );
-      this.category = response.data.category;
+          {
+            headers: {
+              Authorization: this.client ? "Bearer " + this.client.token : null,
+            },
+          }
+        );
+      } else {
+        response = await axios.post(
+          "http://localhost:8081/admin/categories",
+          this.category,
+          {
+            headers: {
+              Authorization: this.client ? "Bearer " + this.client.token : null,
+            },
+          }
+        );
+        this.category.id = response.data.category.id;
+      }
 
       if (response.data.success) {
         Toastify({
-          text: "Tus cambios han sido guardados!",
+          text: is_new
+            ? "La categoria ha sido creada"
+            : "Tus cambios han sido guardados!",
           position: "center",
           duration: 1000,
         }).showToast();
       }
+      await this.loadData();
     },
   },
 };

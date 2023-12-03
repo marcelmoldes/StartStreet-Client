@@ -3,12 +3,14 @@
     @logout="logClientOut"
     @viewCart="shoppingCartOpen = true"
     :client="client"
+    :categories="categories"
     
   ></header-section>
   <div>
     <router-view
       @clientloggedin="authenticateClient"
       @viewCart="shoppingCartOpen = true"
+      :categories="categories"
       :client="client"
     ></router-view>
     <footer-section />
@@ -21,6 +23,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import Cookies from "js-cookie";
 import HeaderSection from "./components/HeaderSection.vue";
 import FooterSection from "./components/FooterSection.vue";
@@ -34,15 +37,21 @@ export default {
   },
   data() {
     return {
+      categories: [],
       client: false,
       shoppingCartOpen: false,
     };
   },
-  mounted() {
+  async mounted() {
     this.authenticateClient();
+    await this.getCategories();
   },
 
   methods: {
+    async getCategories() {
+      let response = await axios.get("http://localhost:8081/categories");
+      this.categories = response.data.categories;
+    },
     authenticateClient() {
       this.client = Cookies.get("client");
       if (this.client) {

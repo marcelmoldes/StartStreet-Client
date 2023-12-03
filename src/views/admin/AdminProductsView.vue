@@ -13,7 +13,7 @@
           <h1 class="text-xl font-bold">Manage Products</h1>
 
           <button
-            @click="this.$router.push('/admin/addproduct')"
+            @click="this.$router.push('/admin/product')"
             class="bg-violet-600 text-white font-bold px-7 py-1"
           >
             Add Product

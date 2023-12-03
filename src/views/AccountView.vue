@@ -2,21 +2,24 @@
   <div id="account" class="mt-10">
     <form>
       <div
-        class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-4 "
+        class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-4"
       >
-        <account-menu-component :client="client" class="col-span-1"></account-menu-component>
+        <account-menu-component
+          :client="client"
+          class="col-span-1"
+        ></account-menu-component>
 
         <div
-          class="grid max-w-2xl mt-10 grid-cols-1 gap-x-6 gap-y-8 p sm:grid-cols-6 md:col-span-3 rounded-md  border border-slate-600  bg-white "
+          class="grid max-w-2xl mt-10 grid-cols-1 gap-x-6 gap-y-8 p sm:grid-cols-6 md:col-span-3 rounded-md border border-slate-600 bg-white"
         >
           <div
-            class="inline-block mt-3 text-center bg-red-600 text-white  rounded-lg"
+            class="inline-block mt-3 text-center bg-red-600 text-white rounded-lg"
             v-if="error"
           >
             Ha habido un error, por favor verifica tu informacion y intentalo de
             nuevo.
           </div>
-          <div class="sm:col-span-4 ">
+          <div class="sm:col-span-4">
             <label
               for="website"
               class="block text-xl font-medium leading-6 text-gray-900"
@@ -39,12 +42,10 @@
                 >
                   {{ v$.clientAccount.email.$errors[0].$message }}
                 </span>
-        
               </div>
 
-              <div class="flex mt-6 gap-x-2 ">
-                <span
-                  class="flex items-center pl-3 font-semibold sm:text-sm"
+              <div class="flex mt-6 gap-x-2">
+                <span class="flex items-center pl-3 font-semibold sm:text-sm"
                   >First Name</span
                 >
                 <input
@@ -59,7 +60,7 @@
                   {{ v$.clientAccount.first_name.$errors[0].$message }}
                 </span>
               </div>
-              
+
               <div class="flex mt-6 gap-x-2">
                 <span
                   class="flex select-none items-center pl-3 font-semibold sm:text-sm"
@@ -68,7 +69,7 @@
                 <input
                   v-model="clientAccount.last_name"
                   type="text"
-                  class=" rounded-md shadow-sm ring-gray-300 ring-1 flex-1 border-0 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-black "
+                  class="rounded-md shadow-sm ring-gray-300 ring-1 flex-1 border-0 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-black"
                 />
                 <span
                   v-if="v$.clientAccount.last_name.$error"
@@ -80,7 +81,7 @@
               <div class="mt-2">
                 <div class="flex mt-6 gap-x-2">
                   <span
-                    class=" items-center pl-3 font-semibold sm:text-sm"
+                    class="items-center pl-3 font-semibold sm:text-sm"
                     :value="clientAccount.address"
                     >Address</span
                   >
@@ -106,7 +107,7 @@
                     type="text"
                     class="block rounded-md shadow-sm ring-gray-300 ring-1 flex-1 border-0 py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-black sm:text-sm sm:leading-6"
                   />
-               
+
                   <span
                     v-if="v$.clientAccount.city.$error"
                     class="text-sm text-cyan-950"
@@ -184,6 +185,43 @@
                     {{ v$.clientAccount.phone.$errors[0].$message }}
                   </span>
                 </div>
+                <div class="col-span-full">
+                  <div
+                    class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10"
+                  >
+                    <label
+                      for="cover-photo"
+                      class="block text-sm font-medium leading-6 text-gray-900"
+                      >Product Image</label
+                    >
+                    <div class="mt-2 flex flex-col gap-y-2">
+                      <img
+                        class="w-full"
+                        :src="
+                          clientAccount.imageBase64
+                            ? clientAccount.imageBase64
+                            : clientAccount.profile_image
+                        "
+                        v-if="
+                          clientAccount.profile_image ||
+                          clientAccount.imageBase64
+                        "
+                      />
+                      <label>Change image:</label>
+                      <input
+                 
+                        id="file-upload"
+                        @change="handleImage"
+                        name="file-upload"
+                        type="file"
+                        accept="image/*"
+                      />     
+                      <p class="text-xs leading-5 text-gray-600">
+                        PNG, JPG, GIF up to 10MB
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -223,7 +261,6 @@ export default {
   props: ["client"],
   data() {
     return {
-    
       error: false,
       clientAccount: {
         first_name: "",
@@ -236,6 +273,7 @@ export default {
         postal_code: "",
         country_code: "",
         phone: "",
+        profile_image: "",
       },
     };
   },
@@ -315,6 +353,7 @@ export default {
             postal_code: this.clientAccount.postal_code,
             country_code: this.clientAccount.country_code,
             phone: this.clientAccount.phone,
+            imageBase64: this.clientAccount.imageBase64,
           },
           {
             headers: {
@@ -345,6 +384,14 @@ export default {
         }
       );
       this.clientAccount = response.data.client;
+    },
+    handleImage(e) {
+      const fileObject = e.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.clientAccount.imageBase64 = e.target.result;
+      };
+      reader.readAsDataURL(fileObject);
     },
   },
 };

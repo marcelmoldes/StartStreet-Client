@@ -110,7 +110,7 @@
           </div>
           <ul class="mt-7">
             <li class="text-lg font-semibold">
-              {{ item.details }}
+              {{ item.description }}
             </li>
           </ul>
         </form>

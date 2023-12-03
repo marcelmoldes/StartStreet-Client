@@ -21,12 +21,15 @@
       </div>
 
       <div v-for="category in categories" :key="category">
-        <h1 class="text-center px-3 ml-6 gap-10 font-bold">
+        <a
+          :href="'/categories/' + category.slug"
+          class="text-center px-3 ml-6 gap-10 font-bold"
+        >
           {{ category.title }}
-        </h1>
+        </a>
       </div>
 
-      <div class="hidden justify-end lg:flex gap-10">
+      <div class="hidden justify-end lg:flex gap-3">
         <button
           v-if="!client"
           @click="$router.push('/login')"
@@ -62,6 +65,13 @@
             />
           </svg>
         </button>
+        <button
+          class="text-base font-semibold text-gray-900 hover:underline hover:underline-offset-8"
+          @click="$router.push('/admin')"
+          v-if="client.role === 'admin'"
+        >
+          Admin Panel
+        </button>
 
         <button @click="$emit('viewCart')" v-if="client" class="p-2">
           <svg
@@ -86,8 +96,6 @@
         >
           <p>Logout</p>
         </button>
-
-       
 
         <button
           v-if="client"
@@ -139,22 +147,16 @@
             <XMarkIcon class="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
-        <div class="mt-6 flow-root">
+        <div
+          class="mt-6 flow-root"
+          v-for="category in categories"
+          :key="category"
+        >
           <div class="-my-6 divide-y divide-gray-500/10">
             <a
-              href="#"
+              :href="'/categories/' + category.slug"
               class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-              >Sweatshirts</a
-            >
-            <a
-              href="#"
-              class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-              >Jeans</a
-            >
-            <a
-              href="#"
-              class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-              >Sneakers</a
+              >{{ category.title }}</a
             >
           </div>
           <div class="py-6">
@@ -249,36 +251,24 @@
 </template>
 
 <script>
-import axios from "axios";
 import { Dialog, DialogPanel } from "@headlessui/vue";
 
-import { XMarkIcon } from "@heroicons/vue/24/outline";
+import { XMarkIcon, Bars3Icon } from "@heroicons/vue/24/outline";
 
 export default {
-  props: ["client"],
+  props: ["client", "categories"],
   components: {
     Dialog,
     DialogPanel,
+    Bars3Icon,
 
     XMarkIcon,
   },
   data() {
     return {
-      categories: [],
-
       mobileMenuOpen: false,
     };
   },
-  async mounted() {
-    let response = await axios.get("http://localhost:8081/categories");
-    this.categories = response.data.categories;
-  },
-}; //<button
-        //  class="text-base font-semibold text-gray-900 hover:underline hover:underline-offset-8"
-        //  @click="$router.push('/admin')"
-        //  v-if="client.admin === 'admin'"
-       // >
-        //  Admin Panel
-        //</button>
+}; //
 </script>
 

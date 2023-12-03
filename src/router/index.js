@@ -17,10 +17,9 @@ import AdminClientsView from "@/views/admin/AdminClientsView.vue";
 import AdminCategoriesView from "@/views/admin/AdminCategoriesView.vue";
 import AdminOrderDetailsView from "@/views/admin/AdminOrderDetailsView.vue";
 import AdminClientDetailsView from "@/views/admin/AdminClientDetailsView.vue";
-import AdminAddProductView from "@/views/admin/AdminAddProductView.vue";
-import AdminProductDetailsView from "@/views/admin/AdminProductDetailsView.vue";
-import AdminCategoryDetailsView from "@/views/admin/AdminCategoryDetailsView.vue";
-import AdminAddCategoryView from "@/views/admin/AdminAddCategoryView.vue";
+import AdminProductView from "@/views/admin/AdminProductView.vue";
+
+import AdminCategoryView from "@/views/admin/AdminCategoryView.vue";
 import ForgotPasswordView from "@/views/ForgotPasswordView.vue";
 
 const routes = [
@@ -115,24 +114,24 @@ const routes = [
     component: AdminClientDetailsView,
   },
   {
-    path: "/admin/addproduct",
-    name: "admin-add-product",
-    component: AdminAddProductView,
+    path: "/admin/product",
+    name: "admin-product",
+    component: AdminProductView,
   },
   {
     path: "/admin/product/:id",
-    name: "admin-product-details",
-    component: AdminProductDetailsView,
+    name: "admin-edit-product",
+    component: AdminProductView,
   },
   {
     path: "/admin/category/:id",
     name: "admin-category-details",
-    component: AdminCategoryDetailsView,
+    component: AdminCategoryView,
   },
   {
     path: "/admin/addcategory",
     name: "admin-add-category",
-    component: AdminAddCategoryView,
+    component: AdminCategoryView,
   },
   {
     path: "/strarstreet/forgotpassword",

@@ -239,7 +239,7 @@ import axios from "axios";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/vue/20/solid";
 import AdminMenuComponent from "@/components/AdminMenuComponent.vue";
 export default {
-  props: ["client"],
+  props: ["client",],
   components: { AdminMenuComponent, ChevronRightIcon, ChevronLeftIcon },
   computed: {
     pageOfOrders() {
