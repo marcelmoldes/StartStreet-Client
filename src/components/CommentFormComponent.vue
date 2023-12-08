@@ -1,32 +1,15 @@
 <template>
-  <div class="mt-10">
+  <div class="mt-20">
     <div>
       <form class="review-form">
         <h3 class="text-lg font-serif m-4">Leave a review</h3>
 
-        <label for="review">Review</label>
+        <label class="" for="review">Review</label>
         <textarea
-          class="bg-gray-200"
+          class="bg-gray-200 mt-2 p-2"
           id="review"
           v-model="comment.message"
         ></textarea>
-
-        <label class="mt-3" for="rating">Rating</label>
-        <select id="rating" v-model.number="rating">
-          <option>5</option>
-          <option>4</option>
-          <option>3</option>
-          <option>2</option>
-          <option>1</option>
-        </select>
-
-        <!-- solution -->
-        <label for="recommend">Would you recommend this product?</label>
-        <select id="recommend" v-model="recommend">
-          <option>Yes</option>
-          <option>No</option>
-        </select>
-        <!-- solution -->
 
         <button
           type="button"

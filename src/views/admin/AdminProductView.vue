@@ -121,6 +121,8 @@
 </template>
 
 <script>
+//import { useVuelidate } from "@vuelidate/core";
+//import { required, email, minLength, maxLength } from "@vuelidate/validators";
 import Toastify from "toastify-js";
 import axios from "axios";
 import AdminMenuComponent from "@/components/AdminMenuComponent.vue";

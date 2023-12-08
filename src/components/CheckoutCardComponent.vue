@@ -53,7 +53,7 @@
             </li>
           </ul>
 
-          <dl class="mt-10 space-y-6 text-sm font-medium text-gray-500">
+          <dl class="mt-10 space-y-6 text-sm font-medium ">
             <div class="flex justify-between">
               <dt>Subtotal</dt>
               <dd class="text-gray-900">{{ order.subtotal }} $</dd>

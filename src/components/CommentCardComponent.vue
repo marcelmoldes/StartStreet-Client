@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <div class="">
     <h1 class="mt-20 text-2xl">RECENT REVIEWS</h1>
+   <div class=" py-5 mt-4">
     <div
       v-for="comment in item.comments"
       :key="comment.id"
-      class="flex py-8"
+      class="flex py-7 px-10 text-center    rounded-sm border-black border bg-gray-100 mt-4"
       style="width: 500px"
     >
       <span class="relative inline-block">
@@ -30,7 +31,7 @@
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="w-7 h-6 hover:fill-orange-600"
+            class="w-7 h-6 hover:fill-white"
           >
             <path
               stroke-linecap="round"
@@ -43,7 +44,7 @@
         <h3 class="text-black">{{ comment.createdAt }}</h3>
       </div>
     </div>
-  </div>
+  </div></div>
 </template>
 
 <script>

@@ -45,19 +45,16 @@
           <div class="space-y-6 text-base text-gray-700" />
         </div>
 
-        <h1 class="text-xl text-blue-500">
-          You have {{ cart }} items in your cart
-        </h1>
+   
         <h1 class="text-3xl">{{ item.title }}</h1>
-        <h2 class="text-xl">{{ item.price }} $</h2>
+        <h2 class="text-xl mt-2">{{ item.price }} $</h2>
         <div class="mt-8">
           <div class="flex items-center justify-between">
             <h2 class="text-lg font-medium text-gray-900">Size</h2>
           </div>
-   
-          <RadioGroup v-model="selectedSize" class="mt-2">
-  
-            <div class="grid grid-cols-3 gap-3 sm:grid-cols-6">
+
+          <RadioGroup v-model="selectedSize" class="mt-4">
+            <div class="grid grid-cols-3 gap-3 mt-2 sm:grid-cols-6">
               <RadioGroupOption
                 as="template"
                 v-for="size in sizes"
@@ -108,22 +105,23 @@
               />
             </button>
           </div>
-          <ul class="mt-7">
-            <li class="text-lg font-semibold">
-              {{ item.description }}
-            </li>
-          </ul>
+          <div class="border border-black mt-5 px-10 py-16 text-center">
+            <h1 class="font-bold ">{{ item.description }}</h1>
+          </div>
+         
         </form>
-      </div>       <comment-form-component       :client="client"
-      :item_id="item.id"
-      @commentSend="loadData($event)"></comment-form-component>
-
+      </div>
+      <comment-form-component
+        :client="client"
+        :item_id="item.id"
+        @commentSend="loadData($event)"
+      ></comment-form-component>
     </div>
   </div>
 </template>
     
   <script>
-  import CommentFormComponent from "./CommentFormComponent.vue";
+import CommentFormComponent from "./CommentFormComponent.vue";
 import axios from "axios";
 import { HeartIcon } from "@heroicons/vue/24/outline";
 import { HeartIcon as HeartIconSolid } from "@heroicons/vue/20/solid";
@@ -153,7 +151,7 @@ export default {
     TabPanels,
     HeartIcon,
     HeartIconSolid,
-    CommentFormComponent
+    CommentFormComponent,
   },
   props: ["item", "client"],
   emits: ["setFavorite", "removeFavorite", "viewCart"],
