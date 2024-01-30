@@ -12,23 +12,17 @@
         <div
           class="grid max-w-2xl mt-10 grid-cols-1 gap-x-6 gap-y-8 p sm:grid-cols-6 md:col-span-3 rounded-md border border-slate-600 bg-white"
         >
-          <div
-            class="inline-block mt-3 text-center bg-red-600 text-white rounded-lg"
-            v-if="error"
-          >
-            Ha habido un error, por favor verifica tu informacion y intentalo de
-            nuevo.
-          </div>
+   
           <div class="sm:col-span-4">
-            <label
-              for="website"
-              class="block text-xl font-medium leading-6 text-gray-900"
-              >Edit Your Personal Information</label
+            <h1
+            
+              class="text-center text-xl font-medium  text-gray-900"
+              >Edit Your Personal Information</h1
             >
-            <div class="mt-2">
-              <div class="flex mt-6 gap-x-2">
+            <div class="mt-2 text-center">
+              <div class="flex mt-6 px-3 gap-10">
                 <span
-                  class="flex select-none items-center pl-3 font-semibold sm:text-sm"
+                  class="p-3 select-none items-center  font-semibold sm:text-sm"
                   >E-mail</span
                 >
                 <input
@@ -44,8 +38,8 @@
                 </span>
               </div>
 
-              <div class="flex mt-6 gap-x-2">
-                <span class="flex items-center pl-3 font-semibold sm:text-sm"
+              <div class="flex mt-6 px-3 gap-10">
+                <span class="p-3 select-none items-center  font-semibold sm:text-sm"
                   >First Name</span
                 >
                 <input
@@ -61,9 +55,9 @@
                 </span>
               </div>
 
-              <div class="flex mt-6 gap-x-2">
+              <div class="flex mt-6 px-3 gap-10">
                 <span
-                  class="flex select-none items-center pl-3 font-semibold sm:text-sm"
+                  class="p-3 select-none items-center  font-semibold sm:text-sm"
                   >Last Name</span
                 >
                 <input
@@ -79,9 +73,9 @@
                 </span>
               </div>
               <div class="mt-2">
-                <div class="flex mt-6 gap-x-2">
+                <div class="flex mt-6 px-3 gap-10">
                   <span
-                    class="items-center pl-3 font-semibold sm:text-sm"
+                    class="p-3 select-none items-center  font-semibold sm:text-sm"
                     :value="clientAccount.address"
                     >Address</span
                   >
@@ -97,9 +91,9 @@
                     {{ v$.clientAccount.address.$errors[0].$message }}
                   </span>
                 </div>
-                <div class="flex mt-6 gap-x-2">
+                <div class="flex mt-6 px-3 gap-10">
                   <span
-                    class="flex select-none items-center pl-3 font-semibold sm:text-sm"
+                    class="p-3 select-none items-center  font-semibold sm:text-sm"
                     >City</span
                   >
                   <input
@@ -115,9 +109,9 @@
                     {{ v$.clientAccount.city.$errors[0].$message }}
                   </span>
                 </div>
-                <div class="flex mt-6 gap-x-2">
+                <div class="flex mt-6 px-3 gap-10">
                   <span
-                    class="flex select-none items-center pl-3 font-semibold sm:text-sm"
+                    class="p-3 select-none items-center  font-semibold sm:text-sm"
                     >State</span
                   >
                   <input
@@ -132,10 +126,10 @@
                     {{ v$.clientAccount.state.$errors[0].$message }}
                   </span>
                 </div>
-                <div class="flex mt-6 gap-x-2">
+                <div class="flex mt-6 px-3 gap-10">
                   <span
-                    class="flex select-none items-center pl-3 font-semibold sm:text-sm"
-                    >Postal Code{{ clientAccount.postal_code }}</span
+                    class="p-3 select-none items-center  font-semibold sm:text-sm"
+                    >Postal Code</span
                   >
 
                   <input
@@ -150,9 +144,9 @@
                     {{ v$.clientAccount.postal_code.$errors[0].$message }}
                   </span>
                 </div>
-                <div class="flex mt-6 gap-x-2">
+                <div class="flex mt-6 px-3 gap-10">
                   <span
-                    class="flex select-none items-center pl-3 font-semibold sm:text-sm"
+                    class="p-3 select-none items-center  font-semibold sm:text-sm"
                     >Country Code</span
                   >
                   <input
@@ -168,9 +162,9 @@
                   </span>
                 </div>
 
-                <div class="flex mt-6 gap-x-2">
+                <div class="flex mt-6 px-3 gap-10">
                   <span
-                    class="flex select-none items-center pl-3 font-semibold sm:text-sm"
+                    class="p-3 select-none items-center  font-semibold sm:text-sm"
                     >Phone Number
                   </span>
                   <input
@@ -227,19 +221,22 @@
           </div>
 
           <div class="col-span-full">
-            <div class="mt-2 flex items-center gap-x-3">
-              <UserCircleIcon
-                class="h-12 w-12 text-gray-300"
-                aria-hidden="true"
-              />
+            <div class="text-center m-12 bg-slate-500 px-2 py-4 p-4">
+          
               <button
                 @click="save"
                 type="button"
-                class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                class=""
               >
                 Change
               </button>
             </div>
+          </div>       <div
+            class="inline-block mt-3 text-center bg-red-600 text-white rounded-lg"
+            v-if="error"
+          >
+            Ha habido un error, por favor verifica tu informacion y intentalo de
+            nuevo.
           </div>
         </div>
       </div>

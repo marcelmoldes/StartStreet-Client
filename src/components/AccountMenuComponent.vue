@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-5 px-10 text-ce">
+  <div class="mt-5 px-10 ">
     <h2 class="text-lg font-semibold text-black">
       Hello {{ client.first_name }} {{ client.last_name }}
     </h2>

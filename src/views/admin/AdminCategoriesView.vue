@@ -1,4 +1,4 @@
-<template>
+fgj<template>
   <div class="mt-10 bg-gray-200">
     <div
       class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-4"
@@ -47,7 +47,7 @@
                 name="location"
                 class="mt-2 block w-30 rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-                <option>5</option>
+                <option>5 Record per Page</option>
                 <option selected="">20</option>
                 <option>30</option>
               </select>
@@ -192,7 +192,7 @@
                               aria-hidden="true"
                             />
                           </button>
-                          <!-- Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" -->
+
                           <a
                             @click.prevent="currentPage = page"
                             href="#"
